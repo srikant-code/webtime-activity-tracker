@@ -9,19 +9,53 @@ import Today from "../Containers/Today";
 import Chart from "../Charts";
 import CircularProgressWithLabel from "../Components/Progress/CircularWithLabel";
 import CustomTextArea from "../Components/MarkDownTextArea";
+import Theme from "../../Utils/theme";
+import CalenderSidebar from "../Components/CalenderSidebar";
+import TimeDistribution from "../Components/TimeDistribution";
+import DaysHoursLeftProgressBar from "../Components/Progress/DaysLeft";
+import MainStatisticsCard from "../Components/Cards/MainStatisticsCard";
 
 function App() {
+  const css = `
+  /* width */
+  ::-webkit-scrollbar {
+    width: ${Theme.SPACING(6)};
+    height: ${Theme.SPACING(6)};
+    cursor: pointer !important;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+  background: transparent; 
+    border-radius: ${Theme.SPACING(10)};
+    cursor: pointer !important;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: ${Theme.COLORS.colors.color_1}; 
+    border-radius: ${Theme.SPACING(10)};
+    cursor: pointer !important;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${Theme.COLORS.shades.color_2}; 
+    cursor: pointer !important;
+  }
+  `;
   return (
     <div>
-      <Header />
+      <style> {css} </style> <Header />
       <Tabs />
-      <Today />
-      {/* <Tab /> */}
-      <CustomTextArea />
-      <CustomButton text="Popup" />
-      {/* <SummaryCard /> */}
+      <Today /> {/* <Tab /> */} <CustomTextArea />
+      <MainStatisticsCard />
+      <CustomButton text="Popup" /> {/* <SummaryCard /> */}{" "}
       <CircularProgressWithLabel />
       <Chart />
+      <DaysHoursLeftProgressBar />
+      <TimeDistribution />
+      {/* <CalenderSidebar /> */}
     </div>
   );
 }

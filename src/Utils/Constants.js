@@ -23,6 +23,7 @@ export const CONSTANTS = {
       SUB_TEXT: "subText",
       REGULAR: "regular",
       SMALL: "small",
+      ULTRASMALL: "ultraSmall",
       BOLD: "bold",
       ITALIC: "italic",
     },
@@ -31,6 +32,8 @@ export const CONSTANTS = {
       COLUMN_WRAP: "column wrap",
       FLEX_START: "flex-start",
       FLEX_END: "flex-end",
+      SPACE_BETWEEN: "space-between",
+      SPACE_AROUND: "space-around",
       CENTER: "center",
       ROW: "row",
       ROW_WRAP: "row wrap",
@@ -45,6 +48,92 @@ export const CONSTANTS = {
       POINT5: "0.5s all ease-in-out",
     },
   },
+};
+
+export const CALENDER_CONSTANTS = {
+  MONTHS: [
+    {
+      fullName: "January",
+      index: 1,
+      totalDays: 31,
+    },
+    {
+      fullName: "February",
+      index: 2,
+      totalDays: 28,
+    },
+    {
+      fullName: "March",
+      index: 3,
+      totalDays: 31,
+    },
+    {
+      fullName: "April",
+      index: 4,
+      totalDays: 30,
+    },
+    {
+      fullName: "May",
+      index: 5,
+      totalDays: 31,
+    },
+    {
+      fullName: "June",
+      index: 6,
+      totalDays: 30,
+    },
+    {
+      fullName: "July",
+      index: 7,
+      totalDays: 31,
+    },
+    {
+      fullName: "August",
+      index: 8,
+      totalDays: 31,
+    },
+    {
+      fullName: "September",
+      index: 9,
+      totalDays: 30,
+    },
+    {
+      fullName: "October",
+      index: 10,
+      totalDays: 31,
+    },
+    {
+      fullName: "November",
+      index: 11,
+      totalDays: 30,
+    },
+    {
+      fullName: "December",
+      index: 12,
+      totalDays: 31,
+    },
+  ],
+  WEEKS: [
+    { number: 1 },
+    { number: 2 },
+    { number: 3 },
+    { number: 4 },
+    { number: 5 },
+  ],
+  DAYS: [
+    { MONDAY: "Monday" },
+    { TUESDAY: "Tuesday" },
+    { WEDNESDAY: "Wednesday" },
+    { THURSDAY: "Thursday" },
+    { FRIDAY: "Friday" },
+    { SATURDAY: "Saturday" },
+    { SUNDAY: "Sunday" },
+  ],
+  MERIDIAN: {
+    AM: "am",
+    PM: "pm",
+  },
+  TIME: [{ 1: "One" }],
 };
 
 export const ResponsiveEffect = (breakpoints) => {

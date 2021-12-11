@@ -70,6 +70,7 @@ let COLORS = {
     gradient_1: `linear-gradient(23deg, rgb(0, 0, 0) 11.82%, rgb(0, 93, 106) 82.4%)`, // download_component
     gradient_3: `linear-gradient(208deg, rgb(0, 0, 0) 11.82%, rgb(0, 93, 106) 82.4%)`, // acheivement_component
     gradient_4: `linear-gradient(29deg, rgb(0, 185, 185) 1.4%, rgb(36, 255, 255) 48.45%)`, // acheivement_component2 blue
+    gradient_5: `linear-gradient(270deg, rgba(172, 50, 228, 0.28) 0%, rgba(121, 24, 242, 0.32) 49.48%, rgba(72, 1, 255, 0.33) 100%)`, // purplue -> blue progress indicator
   },
   effects: {
     buttonShadow: {
@@ -161,6 +162,11 @@ const FONTS = {
     },
     ultraSmall: {
       bold: {
+        fontWeight: "bold",
+        fontSize: "9px",
+        ...common.fontProperties,
+      },
+      regular: {
         fontWeight: "normal",
         fontSize: "9px",
         ...common.fontProperties,
