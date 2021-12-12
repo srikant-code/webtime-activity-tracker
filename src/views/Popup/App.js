@@ -14,6 +14,7 @@ import CalenderSidebar from "../Components/CalenderSidebar";
 import TimeDistribution from "../Components/TimeDistribution";
 import DaysHoursLeftProgressBar from "../Components/Progress/DaysLeft";
 import MainStatisticsCard from "../Components/Cards/MainStatisticsCard";
+import ComingSoon from "../Components/ComingSoon";
 
 function App() {
   const css = `
@@ -51,6 +52,7 @@ function App() {
       <Today /> {/* <Tab /> */} <CustomTextArea />
       <MainStatisticsCard />
       <CustomButton text="Popup" /> {/* <SummaryCard /> */}{" "}
+      <ComingSoon heading="Tab notes" />
       <CircularProgressWithLabel />
       <Chart />
       <DaysHoursLeftProgressBar />

@@ -151,6 +151,10 @@ const CustomTextArea = ({ id = "default" }) => {
       margin: Theme.SPACING(4),
       width: Theme.SPACING(20),
       height: Theme.SPACING(20),
+      display: "flex",
+      justifyContent: CONSTANTS.CSSStyles.FLEX.CENTER,
+      alignItems: CONSTANTS.CSSStyles.FLEX.CENTER,
+      cursor: "pointer",
     },
     topbar_container_left_heading: {
       padding: Theme.SPACING(8),
@@ -193,7 +197,7 @@ const CustomTextArea = ({ id = "default" }) => {
                 <Text
                   type={CONSTANTS.CSSStyles.FONTS.SUB_HEADING}
                   style={styles.topbar_container_left_icon}>
-                  IC
+                  😍
                 </Text>
                 <Text
                   type={CONSTANTS.CSSStyles.FONTS.SUB_HEADING}
