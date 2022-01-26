@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CustomButton from "../Components/Button";
 import SummaryCard from "../Components/Cards/Summary";
 import Header from "../Components/Header";
@@ -15,8 +15,10 @@ import TimeDistribution from "../Components/TimeDistribution";
 import DaysHoursLeftProgressBar from "../Components/Progress/DaysLeft";
 import MainStatisticsCard from "../Components/Cards/MainStatisticsCard";
 import ComingSoon from "../Components/ComingSoon";
+import TimeMe from "timeme.js";
+import HomeScreen from "../Containers/Home";
 
-function App() {
+const App = () => {
   const css = `
   /* width */
   ::-webkit-scrollbar {
@@ -45,10 +47,27 @@ function App() {
     cursor: pointer !important;
   }
   `;
+
+  const [timeSpentOnPage, setTimeSpentOnPage] = useState("");
+
+  useEffect(() => {
+    // Initialize library and start tracking time
+    TimeMe.initialize({
+      currentPageName: "my-home-page", // current page
+      idleTimeoutInSeconds: 30, // seconds
+    });
+
+    // ... Some time later ...
+
+    // Retrieve time spent on current page
+    // setTimeSpentOnPage(TimeMe.getTimeOnCurrentPageInSeconds());
+  });
+
   return (
     <div>
-      <style> {css} </style> <Header />
-      <Tabs />
+      <HomeScreen />
+      <div>{timeSpentOnPage}</div>
+      <style> {css} </style>
       <Today /> {/* <Tab /> */} <CustomTextArea />
       <MainStatisticsCard />
       <CustomButton text="Popup" /> {/* <SummaryCard /> */}{" "}
@@ -60,6 +79,6 @@ function App() {
       {/* <CalenderSidebar /> */}
     </div>
   );
-}
+};
 
 export default App;
