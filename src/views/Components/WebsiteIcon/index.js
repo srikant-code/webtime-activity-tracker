@@ -6,6 +6,7 @@ const WebsiteIcon = ({
   icon = "😊",
   name = "Website",
   variant = BUTTON_CONSTANTS.ICON.ULTRA_SMALL,
+  style = {},
 }) => {
   const styles = {
     websiteContainer: {
@@ -16,6 +17,7 @@ const WebsiteIcon = ({
       width: Theme.SPACING(variant),
       height: Theme.SPACING(variant),
       cursor: "pointer",
+      ...style,
     },
   };
   return <Flex style={styles.websiteContainer}>{icon}</Flex>;

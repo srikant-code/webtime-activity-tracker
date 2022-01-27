@@ -1,6 +1,7 @@
 import { CONSTANTS } from "../../../Utils/Constants";
 import Theme from "../../../Utils/theme";
 import CustomButton, { BUTTON_CONSTANTS } from "../../Components/Button";
+import RankingList from "../../Components/Cards/Ranking";
 import RecentList from "../../Components/Cards/Recent";
 import Flex from "../../Components/Container";
 import Header from "../../Components/Header";
@@ -38,7 +39,10 @@ const HomeScreen = () => {
       style={{ padding: Theme.SPACING(30) }}
     >
       <RenderHeader />
-      <RecentList />
+      <Flex>
+        <RecentList />
+        <RankingList />
+      </Flex>
     </Flex>
   );
 };

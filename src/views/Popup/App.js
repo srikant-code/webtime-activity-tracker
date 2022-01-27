@@ -46,6 +46,13 @@ const App = () => {
     background: ${Theme.COLORS.shades.color_2}; 
     cursor: pointer !important;
   }
+  .cardHover {
+    transition: 0.15s all ease-in-out;
+  }
+  .cardHover:hover {
+    background: ${Theme.COLORS.shades.color_6} !important; 
+    transition: 0.15s all ease-in-out;
+  }
   `;
 
   const [timeSpentOnPage, setTimeSpentOnPage] = useState("");

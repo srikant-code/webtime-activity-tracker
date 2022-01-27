@@ -15,6 +15,11 @@ export const CONSTANTS = {
     PRESS_KIT_ROUTE: "/press-kit",
     HOME_ROUTE: "/",
   },
+  RANK: {
+    INCREASE: "increase",
+    DECREASE: "decrease",
+    STABLE: "stable",
+  },
   CSSStyles: {
     FONTS: {
       HEADING: "heading",
@@ -25,6 +30,11 @@ export const CONSTANTS = {
       SMALL: "small",
       ULTRASMALL: "ultraSmall",
       BOLD: "bold",
+      ELLIPSIS: {
+        textOverflow: "ellipsis",
+        overflow: "hidden",
+        whiteSpace: "nowrap",
+      },
       ITALIC: "italic",
     },
     FLEX: {
