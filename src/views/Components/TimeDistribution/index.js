@@ -13,6 +13,7 @@ const TimeDistribution = () => {
       width: Theme.SPACING(containerWidth),
       height: Theme.SPACING(containerWidth * 0.21),
       margin: Theme.SPACING(20),
+      zIndex: 2,
     },
     content: {
       height: "88%",
@@ -22,11 +23,12 @@ const TimeDistribution = () => {
       borderRadius: Theme.SPACING(20),
       width: Theme.SPACING(containerWidth),
       height: Theme.SPACING(containerWidth * 0.21),
-      zIndex: -1,
+      zIndex: 1,
     },
     meridianContainer: {
       width: "-webkit-fill-available",
       padding: `${Theme.SPACING(16)} ${Theme.SPACING(16)}`,
+      zIndex: 2,
     },
     meridian: {
       background: Theme.COLORS.shades.color_1,
@@ -35,17 +37,20 @@ const TimeDistribution = () => {
       padding: `${Theme.SPACING(3)} ${Theme.SPACING(6)}`,
       color: Theme.COLORS.shades.color_8,
       fontWeight: CONSTANTS.CSSStyles.FONTS.BOLD,
+      zIndex: 2,
     },
     timeDist: {
       cursor: "pointer",
+      zIndex: 2,
     },
-    timeDistLabel: { color: Theme.COLORS.shades.color_8 },
+    timeDistLabel: { color: Theme.COLORS.white, zIndex: 2 },
     timeDistIndicator: {
       borderRadius: Theme.SPACING(6),
       background: Theme.COLORS.shades.color_1,
       width: Theme.SPACING(18),
       height: Theme.SPACING(18),
       margin: Theme.SPACING(4),
+      zIndex: 2,
     },
   };
   return (
@@ -54,29 +59,35 @@ const TimeDistribution = () => {
       <Flex
         style={styles.content}
         flexFlow={CONSTANTS.CSSStyles.FLEX.COLUMN}
-        justifyContent={CONSTANTS.CSSStyles.FLEX.SPACE_BETWEEN}>
+        justifyContent={CONSTANTS.CSSStyles.FLEX.SPACE_BETWEEN}
+      >
         <Flex
           style={styles.meridianContainer}
-          justifyContent={CONSTANTS.CSSStyles.FLEX.SPACE_BETWEEN}>
+          justifyContent={CONSTANTS.CSSStyles.FLEX.SPACE_BETWEEN}
+        >
           <kbd style={styles.meridian}>AM</kbd>
           <kbd style={styles.meridian}>PM</kbd>
         </Flex>
         <Flex>
           <Flex>
-            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((time) => {
+            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((time, index) => {
               return (
                 <Flex
                   flexFlow={CONSTANTS.CSSStyles.FLEX.COLUMN}
-                  style={styles.timeDist}>
+                  style={styles.timeDist}
+                  key={index}
+                >
                   <div
                     style={{
                       ...styles.timeDistIndicator,
                       opacity: `${Math.random() * 100}%`,
-                    }}></div>
+                    }}
+                  ></div>
                   <Text
                     type={CONSTANTS.CSSStyles.FONTS.ULTRASMALL}
                     weight={CONSTANTS.CSSStyles.FONTS.BOLD}
-                    style={styles.timeDistLabel}>
+                    style={styles.timeDistLabel}
+                  >
                     {time}
                   </Text>
                 </Flex>
@@ -84,20 +95,24 @@ const TimeDistribution = () => {
             })}
           </Flex>
           <Flex>
-            {[12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((time) => {
+            {[12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((time, index) => {
               return (
                 <Flex
                   flexFlow={CONSTANTS.CSSStyles.FLEX.COLUMN}
-                  style={styles.timeDist}>
+                  style={styles.timeDist}
+                  key={index}
+                >
                   <div
                     style={{
                       ...styles.timeDistIndicator,
                       opacity: `${Math.random() * 100}%`,
-                    }}></div>
+                    }}
+                  ></div>
                   <Text
                     type={CONSTANTS.CSSStyles.FONTS.ULTRASMALL}
                     weight={CONSTANTS.CSSStyles.FONTS.BOLD}
-                    style={styles.timeDistLabel}>
+                    style={styles.timeDistLabel}
+                  >
                     {time}
                   </Text>
                 </Flex>

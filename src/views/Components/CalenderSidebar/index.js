@@ -1,8 +1,10 @@
 import { CALENDER_CONSTANTS, CONSTANTS } from "../../../Utils/Constants";
 import Theme from "../../../Utils/theme";
+import ButtonRippleEffect from "../Button/ButtonRippleEffect";
+import CardLayout from "../Cards/Layout";
 import Flex from "../Container";
 
-const CalenderSidebar = () => {
+const CalenderSidebar = ({ style = {} }) => {
   const months = CALENDER_CONSTANTS.MONTHS;
   const weeks = CALENDER_CONSTANTS.WEEKS;
 
@@ -26,6 +28,7 @@ const CalenderSidebar = () => {
       lineBreak: "anywhere",
       position: "sticky",
       textAlign: CONSTANTS.CSSStyles.FLEX.CENTER,
+      color: Theme.COLORS.shades.color_2,
       top: Theme.SPACING(50),
       margin: `${Theme.SPACING(20)} 0`,
       bottom: Theme.SPACING(50),
@@ -38,6 +41,7 @@ const CalenderSidebar = () => {
       borderRadius: Theme.SPACING(50),
       margin: Theme.SPACING(10),
       height: Theme.SPACING(16),
+      border: `${Theme.SPACING(1)} solid ${Theme.COLORS.shades.color_5}`,
       background: Theme.COLORS.gradient.gradient_5,
     },
   };
@@ -51,18 +55,23 @@ const CalenderSidebar = () => {
               style={{
                 ...styles.clickRectContainer,
                 height: Theme.SPACING(35),
-              }}>
-              <Flex style={styles.datetext}>{day}</Flex>
+              }}
+            >
+              <CustomButtonRipple>
+                <Flex style={styles.datetext}>{day}</Flex>
+              </CustomButtonRipple>
             </Flex>
             <Flex
               style={styles.progressIndicatorContainer}
-              justifyContent={CONSTANTS.CSSStyles.FLEX.FLEX_START}>
+              justifyContent={CONSTANTS.CSSStyles.FLEX.FLEX_START}
+            >
               {/* Progress Indicator or props */}
               <div
                 style={{
                   ...styles.progressIndicator,
                   width: `${Math.random() * 100}%`,
-                }}></div>
+                }}
+              ></div>
             </Flex>
           </div>
         ))}
@@ -76,12 +85,14 @@ const CalenderSidebar = () => {
         {weeks.map((week) => (
           <div key={week.number} style={styles.rowFlex}>
             <Flex style={styles.clickRectContainer}>
-              <Flex style={styles.datetext}>
-                WEEK
-                <br />
-                <br />
-                {week.number}
-              </Flex>
+              <CustomButtonRipple>
+                <Flex style={styles.datetext}>
+                  WEEK
+                  <br />
+                  <br />
+                  {week.number}
+                </Flex>
+              </CustomButtonRipple>
             </Flex>
             <RenderDays />
           </div>
@@ -90,17 +101,36 @@ const CalenderSidebar = () => {
     );
   };
 
+  const CustomButtonRipple = ({ children, style }) => {
+    return (
+      <ButtonRippleEffect
+        style={{
+          height: "100%",
+          width: styles.clickRectContainer.width,
+        }}
+      >
+        {children}
+      </ButtonRippleEffect>
+    );
+  };
+
   return (
-    <>
-      {months.map((month) => (
-        <div key={month.index} style={styles.rowFlex}>
-          <Flex style={styles.clickRectContainer}>
-            <Flex style={styles.datetext}>{month.fullName.toUpperCase()}</Flex>
-          </Flex>
-          <RenderWeeks />
-        </div>
-      ))}
-    </>
+    <CardLayout style={style} heading="Calender">
+      <div style={{ height: "84vh" }} className="scrollBarHiddenDiv">
+        {months.map((month) => (
+          <div key={month.index} style={styles.rowFlex}>
+            <Flex style={styles.clickRectContainer}>
+              <CustomButtonRipple>
+                <Flex style={styles.datetext}>
+                  {month.fullName.toUpperCase()}
+                </Flex>
+              </CustomButtonRipple>
+            </Flex>
+            <RenderWeeks />
+          </div>
+        ))}
+      </div>
+    </CardLayout>
   );
 };
 

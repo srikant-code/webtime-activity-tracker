@@ -17,6 +17,13 @@ import MainStatisticsCard from "../Components/Cards/MainStatisticsCard";
 import ComingSoon from "../Components/ComingSoon";
 import TimeMe from "timeme.js";
 import HomeScreen from "../Containers/Home";
+import { CONSTANTS } from "../../Utils/Constants";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+AOS.init({
+  offset: 70, // offset (in px) from the original trigger point
+});
 
 const App = () => {
   const css = `
@@ -24,12 +31,13 @@ const App = () => {
   ::-webkit-scrollbar {
     width: ${Theme.SPACING(6)};
     height: ${Theme.SPACING(6)};
+    background: ${Theme.COLORS.shades.color_8};
     cursor: pointer !important;
   }
 
   /* Track */
   ::-webkit-scrollbar-track {
-  background: transparent; 
+  background: ${CONSTANTS.CSSStyles.GENERIC.TRANSPARENT}; 
     border-radius: ${Theme.SPACING(10)};
     cursor: pointer !important;
   }
@@ -53,6 +61,15 @@ const App = () => {
     background: ${Theme.COLORS.shades.color_6} !important; 
     transition: 0.15s all ease-in-out;
   }
+  .scrollBarHiddenDiv {
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  }
+  .scrollBarHiddenDiv::-webkit-scrollbar { /* WebKit */
+      width: 0;
+      height: 0;
+  }
   `;
 
   const [timeSpentOnPage, setTimeSpentOnPage] = useState("");
@@ -71,19 +88,22 @@ const App = () => {
   });
 
   return (
-    <div>
-      <HomeScreen />
+    <div style={{ background: Theme.COLORS.shades.color_7 }}>
       <div>{timeSpentOnPage}</div>
       <style> {css} </style>
-      <Today /> {/* <Tab /> */} <CustomTextArea />
-      <MainStatisticsCard />
-      <CustomButton text="Popup" /> {/* <SummaryCard /> */}{" "}
-      <ComingSoon heading="Tab notes" />
-      <CircularProgressWithLabel />
+      <HomeScreen />
+      {/* <Today /> */}
+      {/* <Tab /> */}
+      {/* <CustomTextArea /> */}
+      {/* <MainStatisticsCard /> */}
+      {/* <CustomButton text="Popup" /> */}
+      {/* <SummaryCard />  */}
+      {/* <ComingSoon heading="Tab notes" /> */}
+      {/* <CircularProgressWithLabel />
       <Chart />
       <DaysHoursLeftProgressBar />
       <TimeDistribution />
-      {/* <CalenderSidebar /> */}
+      <CalenderSidebar /> */}
     </div>
   );
 };

@@ -1,10 +1,30 @@
-import { CONSTANTS } from "../../../Utils/Constants";
+import { CONSTANTS, RANDOM } from "../../../Utils/Constants";
 import Theme from "../../../Utils/theme";
 import Flex from "../Container";
 
-const Text = ({ type = "heading", jsx, weight = "bold", children, style }) => {
+const Text = ({
+  type = "heading",
+  jsx,
+  weight = "bold",
+  children,
+  style,
+  animation = RANDOM(CONSTANTS.CSSStyles.ANIMATION.AOS.SLIDE),
+  animationDelay = "50",
+}) => {
   const properties = Theme.FONTS.cabin[type][weight];
-  return <p style={{ ...properties, ...style }}>{children}</p>;
+  return (
+    <p
+      style={{
+        color: Theme.COLORS.shades.color_2,
+        ...properties,
+        ...style,
+      }}
+      data-aos={animation}
+      data-aos-delay={animationDelay}
+    >
+      {children}
+    </p>
+  );
 };
 
 export default Text;
@@ -16,6 +36,7 @@ export const TextLayout1 = ({
   const styles = {
     text: {
       width: Theme.SPACING(200),
+      color: Theme.COLORS.shades.color_2,
       ...CONSTANTS.CSSStyles.FONTS.ELLIPSIS,
     },
   };

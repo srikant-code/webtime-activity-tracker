@@ -25,7 +25,8 @@ const Flex = ({
       style={styles.flex}
       className={className ?? null}
       data-aos={animation}
-      data-aos-delay={animationDelay}>
+      data-aos-delay={animationDelay}
+    >
       {children}
     </div>
   );

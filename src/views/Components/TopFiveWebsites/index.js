@@ -10,8 +10,8 @@ const Top5Websites = ({ websites }) => {
   };
   return (
     <Flex style={styles.container}>
-      {websites.map((website) => (
-        <WebsiteIcon icon="😊" name={website} />
+      {websites.map((website, index) => (
+        <WebsiteIcon icon="😊" name={website} key={index} />
       ))}
     </Flex>
   );

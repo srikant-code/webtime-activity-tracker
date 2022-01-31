@@ -25,8 +25,8 @@ const Tabs = ({
   return (
     <Flex justifyContent={CONSTANTS.CSSStyles.FLEX.FLEX_START}>
       {items.map((item, index) => (
-        <div onClick={() => setCurrentActive(index)}>
-          <Tab key={index} data={item} active={currentActive} index={index} />
+        <div key={index} onClick={() => setCurrentActive(index)}>
+          <Tab data={item} active={currentActive} index={index} />
         </div>
       ))}
     </Flex>

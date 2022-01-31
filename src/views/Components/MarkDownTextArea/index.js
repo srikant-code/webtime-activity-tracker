@@ -5,8 +5,9 @@ import { CONSTANTS } from "../../../Utils/Constants";
 import Text from "../Text";
 import { Linkify } from "../../../Utils/utilities";
 import VerticalBar from "../VerticalBar";
+import CardLayout from "../Cards/Layout";
 
-const CustomTextArea = ({ id = "default" }) => {
+const CustomTextArea = ({ id = "default", style = {} }) => {
   const [value, setValue] = useState("");
   useEffect(() => {
     let textareaText = value;
@@ -126,6 +127,7 @@ const CustomTextArea = ({ id = "default" }) => {
       borderRadius: `${Theme.SPACING(8)}`,
       justifyContent: CONSTANTS.CSSStyles.FLEX.CENTER,
       alignItems: CONSTANTS.CSSStyles.FLEX.CENTER,
+      width: "100%",
     },
     leftTopbar: {
       display: "flex",
@@ -169,7 +171,8 @@ const CustomTextArea = ({ id = "default" }) => {
       margin: 10,
       width: "auto",
       height: 240,
-      background: "white",
+      background: Theme.COLORS.shades.color_7,
+      color: Theme.COLORS.shades.color_2,
       ...Theme.FONTS.cabin.subHeading.bold,
     },
     textAreaDivider: {
@@ -185,10 +188,11 @@ const CustomTextArea = ({ id = "default" }) => {
       borderRadius: Theme.SPACING(8),
       maxHeight: Theme.SPACING(250),
       overflow: "auto",
+      color: Theme.COLORS.shades.color_2,
     },
   };
   return (
-    <>
+    <CardLayout style={style} heading="Take quick notes here">
       <div style={styles.container}>
         <div style={styles.textAreaDivider}>
           <div style={styles.leftTopbar}>
@@ -196,19 +200,22 @@ const CustomTextArea = ({ id = "default" }) => {
               <div style={styles.topbar_container_left}>
                 <Text
                   type={CONSTANTS.CSSStyles.FONTS.SUB_HEADING}
-                  style={styles.topbar_container_left_icon}>
+                  style={styles.topbar_container_left_icon}
+                >
                   😍
                 </Text>
                 <Text
                   type={CONSTANTS.CSSStyles.FONTS.SUB_HEADING}
-                  style={styles.topbar_container_left_heading}>
+                  style={styles.topbar_container_left_heading}
+                >
                   Heading
                 </Text>
               </div>
               <Text
                 type={CONSTANTS.CSSStyles.FONTS.SUB_TEXT}
                 weight={CONSTANTS.CSSStyles.FONTS.REGULAR}
-                style={styles.topbar_container_right}>
+                style={styles.topbar_container_right}
+              >
                 Markdown supported
               </Text>
             </div>
@@ -217,7 +224,8 @@ const CustomTextArea = ({ id = "default" }) => {
               value={value}
               className="spillTextArea"
               style={styles.textarea}
-              onChange={(e) => setValue(e.target.value)}></textarea>
+              onChange={(e) => setValue(e.target.value)}
+            ></textarea>
             <style> {css} </style>
           </div>
           <VerticalBar />
@@ -226,7 +234,8 @@ const CustomTextArea = ({ id = "default" }) => {
               <div style={styles.topbar_container_left}>
                 <Text
                   type={CONSTANTS.CSSStyles.FONTS.SUB_HEADING}
-                  style={styles.topbar_container_left_heading}>
+                  style={styles.topbar_container_left_heading}
+                >
                   Preview
                 </Text>
               </div>
@@ -234,11 +243,12 @@ const CustomTextArea = ({ id = "default" }) => {
             <div
               id={`spill-${id}`}
               style={styles.mdRenderDiv}
-              className="renderMarkdown"></div>
+              className="renderMarkdown"
+            ></div>
           </div>
         </div>
       </div>
-    </>
+    </CardLayout>
   );
 };
 

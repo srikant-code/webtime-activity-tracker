@@ -23,11 +23,92 @@ import { Pxtorem } from "./Constants";
 // default theme
 
 //TODO: Change it to Cabin
-
+export const MODE = {
+  DARK: {
+    MODE: "DARK",
+    THEME: {
+      colors: {
+        color_1: "#9399F5",
+      },
+      shades: {
+        color_8: "#000000", // pure black
+        color_7: "#141414", // black
+        color_6: "#1F1F1F", // black-text
+        color_5: "#292929", // grey
+        color_4: "#858585", // lightgrey
+        color_3: "#EEEDED", // faintgrey
+        color_2: "#F8F9FA", // ghostwhite
+        color_1: "#FFFFFF", // white
+      },
+    },
+  },
+  LIGHT: {
+    MODE: "LIGHT",
+    THEME: {
+      colors: {
+        color_1: "#A259FF",
+      },
+      shades: {
+        color_1: "#000000", // pure black
+        color_2: "#342E2D", // black
+        color_3: "#727272", // black-text
+        color_4: "#9B9B9B", // grey
+        color_5: "#E2E2E2", // lightgrey
+        color_6: "#EEEDED", // faintgrey
+        color_7: "#F8F9FA", // ghostwhite
+        color_8: "#FFFFFF", // white
+      },
+    },
+  },
+  NEBULA: {
+    MODE: "NEBULA",
+    THEME: {
+      colors: {
+        color_1: "#A259FF",
+      },
+      shades: {
+        color_8: "#000000", // pure black
+        color_7: "#17112c", // black
+        color_6: "#3b374e", // black-text
+        color_5: "#624ca6", // grey
+        color_4: "#a396d5", // lightgrey
+        color_3: "#EEEDED", // faintgrey
+        color_2: "#F8F9FA", // ghostwhite
+        color_1: "#FFFFFF", // white
+      },
+    },
+  },
+  RED_VELVET: {
+    MODE: "RED_VELVET",
+    THEME: {
+      colors: {
+        color_1: "#ff6262",
+      },
+      shades: {
+        color_8: "#000000", // pure black
+        color_7: "#2c1111", // black
+        color_6: "#4e3737", // black-text
+        color_5: "#a64c4c", // grey
+        color_4: "#d59696", // lightgrey
+        color_3: "#EEEDED", // faintgrey
+        color_2: "#F8F9FA", // ghostwhite
+        color_1: "#FFFFFF", // white
+      },
+    },
+  },
+};
+export let CURRENT_MODE = MODE.LIGHT;
+export const CHANGE_CURRENT_MODE = (mode = MODE.LIGHT) => {
+  CURRENT_MODE = {
+    MODE: mode.MODE,
+    THEME: mode.THEME,
+  };
+  return CURRENT_MODE;
+};
 const common = {
   text: "C4C4C4",
   fontProperties: {
-    color: "black",
+    // color: "black",
     fontFamily: "Inter",
     fontStyle: "normal",
     lineHeight: "152.02%",
@@ -37,16 +118,8 @@ const common = {
 };
 
 let COLORS = {
-  shades: {
-    color_1: "#000000", // pure black
-    color_2: "#342E2D", // black
-    color_3: "#727272", // black-text
-    color_4: "#9B9B9B", // grey
-    color_5: "#E2E2E2", // lightgrey
-    color_6: "#EEEDED", // faintgrey
-    color_7: "#F8F9FA", // ghostwhite
-    color_8: "#FFFFFF", // white
-  },
+  shades: CURRENT_MODE.THEME.shades,
+  white: "white",
   workspace: {
     color_1: "#222222", // black
     color_2: "#3778FF", // metab-bluw
@@ -60,12 +133,15 @@ let COLORS = {
     color_2: "#48B2FF", // secondary
   },
   colors: {
-    color_1: "#A259FF", // purple
-    color_2: "#002f2d", // darkgreen
+    color_1: CURRENT_MODE.THEME.colors.color_1, // purple
+    color_2: "#002f2d", // darkdarkgreen
     color_3: "#FF5C9C", // pink
     color_4: "#7B61FF", // violet
+    color_5: "#00d900", // green
+    color_6: "#ff5858", // red
   },
   gradient: {
+    gradient_6: `linear-gradient(0deg, rgb(0 0 0 / 55%) 11.82%, rgb(0 0 0 / 0%) 100%)`, // black text to transparent for text
     gradient_2: `linear-gradient(340deg, #000000 11.82%, #005D6A 82.4%)`, // footer
     gradient_1: `linear-gradient(23deg, rgb(0, 0, 0) 11.82%, rgb(0, 93, 106) 82.4%)`, // download_component
     gradient_3: `linear-gradient(208deg, rgb(0, 0, 0) 11.82%, rgb(0, 93, 106) 82.4%)`, // acheivement_component
@@ -78,6 +154,9 @@ let COLORS = {
     },
     summaryCardShadow: {
       boxShadow: `0px 4px 12px rgba(0, 0, 0, 0.06)`,
+    },
+    circleShadow: {
+      boxShadow: `-2px 4px 9px rgba(50, 0, 115, 0.07), -6px 14px 17px rgba(162, 89, 255, 0.11)`,
     },
     big_blur: {
       background: common.text,

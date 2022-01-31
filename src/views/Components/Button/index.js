@@ -39,7 +39,7 @@ const CustomButton = ({
           background:
             variant === BUTTON_CONSTANTS.FILLED
               ? Theme.COLORS.colors.color_1
-              : Theme.COLORS.shades.color_8,
+              : Theme.COLORS.shades.color_7,
           boxShadow: showShadow
             ? Theme.COLORS.effects.buttonShadow.boxShadow
             : "none",

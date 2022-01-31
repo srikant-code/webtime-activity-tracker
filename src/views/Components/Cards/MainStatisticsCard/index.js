@@ -5,8 +5,9 @@ import Text from "../../Text";
 import Top5Websites from "../../TopFiveWebsites";
 import VerticalBar from "../../VerticalBar";
 import WebsiteIcon from "../../WebsiteIcon";
+import CardLayout from "../Layout";
 
-const MainStatisticsCard = () => {
+const MainStatisticsCard = ({ style = {} }) => {
   const styles = {
     container: {
       borderRadius: Theme.SPACING(20),
@@ -53,7 +54,8 @@ const MainStatisticsCard = () => {
       <>
         <Flex
           justifyContent={CONSTANTS.CSSStyles.FLEX.SPACE_BETWEEN}
-          style={styles.top5Websites}>
+          style={styles.top5Websites}
+        >
           <Text type={CONSTANTS.CSSStyles.FONTS.SMALL} style={styles.leftText}>
             {leftText}
           </Text>
@@ -68,11 +70,13 @@ const MainStatisticsCard = () => {
     return (
       <Flex
         flexFlow={CONSTANTS.CSSStyles.FLEX.COLUMN}
-        justifyContent={CONSTANTS.CSSStyles.FLEX.FLEX_START}>
+        justifyContent={CONSTANTS.CSSStyles.FLEX.FLEX_START}
+      >
         <FlexSpaceBetween leftText="Top category" rightText="58.3%">
           <Text
             type={CONSTANTS.CSSStyles.FONTS.SUB_HEADING}
-            style={styles.topCategory}>
+            style={styles.topCategory}
+          >
             😂 Category Name
           </Text>
         </FlexSpaceBetween>
@@ -84,7 +88,8 @@ const MainStatisticsCard = () => {
     return (
       <Flex
         flexFlow={CONSTANTS.CSSStyles.FLEX.COLUMN}
-        justifyContent={CONSTANTS.CSSStyles.FLEX.FLEX_START}>
+        justifyContent={CONSTANTS.CSSStyles.FLEX.FLEX_START}
+      >
         <FlexSpaceBetween leftText="Top 5 websites" rightText="58.3%">
           <Top5Websites
             websites={["figma", "figma", "figma", "figma", "figma"]}
@@ -98,13 +103,15 @@ const MainStatisticsCard = () => {
     return (
       <Flex
         flexFlow={CONSTANTS.CSSStyles.FLEX.COLUMN}
-        alignItems={CONSTANTS.CSSStyles.FLEX.FLEX_START}>
+        alignItems={CONSTANTS.CSSStyles.FLEX.FLEX_START}
+      >
         <Text type={CONSTANTS.CSSStyles.FONTS.SMALL}>Productivity Score</Text>
         <Flex alignItems={CONSTANTS.CSSStyles.FLEX.FLEX_START}>
           <Text type={CONSTANTS.CSSStyles.FONTS.HEADING_2}>77</Text>
           <Text
             type={CONSTANTS.CSSStyles.FONTS.SMALL}
-            style={styles.maxProdScore}>
+            style={styles.maxProdScore}
+          >
             /100
           </Text>
         </Flex>
@@ -118,12 +125,14 @@ const MainStatisticsCard = () => {
         <>
           <Text
             type={CONSTANTS.CSSStyles.FONTS.HEADING_2}
-            style={stylesLocal.time}>
+            style={stylesLocal.time}
+          >
             {time}
           </Text>
           <Text
             type={CONSTANTS.CSSStyles.FONTS.SMALL}
-            style={stylesLocal.timeText}>
+            style={stylesLocal.timeText}
+          >
             {timeText}
           </Text>
         </>
@@ -145,11 +154,13 @@ const MainStatisticsCard = () => {
     return (
       <Flex
         flexFlow={CONSTANTS.CSSStyles.FLEX.COLUMN}
-        alignItems={CONSTANTS.CSSStyles.FLEX.FLEX_START}>
+        alignItems={CONSTANTS.CSSStyles.FLEX.FLEX_START}
+      >
         <Flex>
           <Text
             type={CONSTANTS.CSSStyles.FONTS.SUB_TEXT}
-            weight={CONSTANTS.CSSStyles.FONTS.REGULAR}>
+            weight={CONSTANTS.CSSStyles.FONTS.REGULAR}
+          >
             Total screen time
           </Text>
           <WebsiteIcon icon="❓" />
@@ -166,16 +177,23 @@ const MainStatisticsCard = () => {
     return (
       <Flex
         style={styles.cardsContainer}
-        justifyContent={CONSTANTS.CSSStyles.FLEX.SPACE_BETWEEN}>
+        justifyContent={CONSTANTS.CSSStyles.FLEX.SPACE_BETWEEN}
+      >
         {cards.map((item, index) => {
           return (
-            <>
+            <Flex
+              key={index}
+              style={{ flex: 1 }}
+              justifyContent={CONSTANTS.CSSStyles.FLEX.SPACE_AROUND}
+            >
               <Flex
                 flexFlow={CONSTANTS.CSSStyles.FLEX.COLUMN}
-                alignItems={CONSTANTS.CSSStyles.FLEX.FLEX_START}>
+                alignItems={CONSTANTS.CSSStyles.FLEX.FLEX_START}
+              >
                 <Text
                   type={CONSTANTS.CSSStyles.FONTS.SMALL}
-                  style={styles.leftText}>
+                  style={styles.leftText}
+                >
                   {item.heading}
                 </Text>
                 <Flex>
@@ -190,7 +208,7 @@ const MainStatisticsCard = () => {
               ) : (
                 <></>
               )}
-            </>
+            </Flex>
           );
         })}
       </Flex>
@@ -226,19 +244,22 @@ const MainStatisticsCard = () => {
   ];
 
   return (
-    <Flex
-      style={styles.container}
-      alignContent={CONSTANTS.CSSStyles.FLEX.FLEX_END}>
-      <TotalTimeAndGraph />
-      <InfoCards />
-      <Flex style={styles.bottomContainer}>
-        <ProductivityScoreIndicator />
-        <VerticalBar style={styles.verticalBar} />
-        <TopFiveWebsites />
-        <VerticalBar style={styles.verticalBar} />
-        <TopCategory />
+    <CardLayout heading="Today's Summary" style={style}>
+      <Flex
+        style={styles.container}
+        alignContent={CONSTANTS.CSSStyles.FLEX.FLEX_END}
+      >
+        <TotalTimeAndGraph />
+        <InfoCards />
+        <Flex style={styles.bottomContainer}>
+          <ProductivityScoreIndicator />
+          <VerticalBar style={styles.verticalBar} />
+          <TopFiveWebsites />
+          <VerticalBar style={styles.verticalBar} />
+          <TopCategory />
+        </Flex>
       </Flex>
-    </Flex>
+    </CardLayout>
   );
 };
 

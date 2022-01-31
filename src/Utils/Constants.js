@@ -4,6 +4,10 @@ export const Pxtorem = (num) => {
   return num / 16 + "rem";
 };
 
+export const RANDOM = (arr = []) => {
+  return arr[Math.floor(Math.random() * arr.length)];
+};
+
 export const CONSTANTS = {
   DOWNLOAD_BLADERS_LINK:
     "https://play.google.com/store/apps/details?id=com.gamersngame.BladersAR&hl=en_IN&gl=US&ref=bladers_website",
@@ -19,6 +23,12 @@ export const CONSTANTS = {
     INCREASE: "increase",
     DECREASE: "decrease",
     STABLE: "stable",
+  },
+  VARIANTS: {
+    SUCCESS: "success",
+    ERROR: "error",
+    INFO: "info",
+    WARNING: "warning",
   },
   CSSStyles: {
     FONTS: {
@@ -52,10 +62,18 @@ export const CONSTANTS = {
       FIT_CONTENT: "fit-content",
       ABSOLUTE: "absolute",
       RELATIVE: "relative",
+      TRANSPARENT: "transparent",
     },
     ANIMATION: {
       POINT3: "0.3s all ease-in-out",
       POINT5: "0.5s all ease-in-out",
+      AOS: {
+        SLIDE: ["slide-up", "slide-down", "slide-left", "slide-right"],
+        SLIDE_UP: "slide-up",
+        SLIDE_DOWN: "slide-down",
+        SLIDE_LEFT: "slide-left",
+        SLIDE_RIGHT: "slide-right",
+      },
     },
   },
 };
