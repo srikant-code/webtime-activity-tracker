@@ -15,7 +15,7 @@ import TimeDistribution from "../Components/TimeDistribution";
 import DaysHoursLeftProgressBar from "../Components/Progress/DaysLeft";
 import MainStatisticsCard from "../Components/Cards/MainStatisticsCard";
 import ComingSoon from "../Components/ComingSoon";
-import TimeMe from "timeme.js";
+// import TimeMe from "timeme.js";
 import HomeScreen from "../Containers/Home";
 import { CONSTANTS } from "../../Utils/Constants";
 import AOS from "aos";
@@ -70,19 +70,23 @@ const App = () => {
       width: 0;
       height: 0;
   }
+  hr {
+    border: none;
+    margin: ${Theme.SPACING(2)} 0 ${Theme.SPACING(4)} 0;
+    border-top: ${Theme.SPACING(0.1)} solid ${Theme.COLORS.colors.color_1};
+    opacity: 0.3;
+  }
   `;
 
   const [timeSpentOnPage, setTimeSpentOnPage] = useState("");
 
   useEffect(() => {
     // Initialize library and start tracking time
-    TimeMe.initialize({
-      currentPageName: "my-home-page", // current page
-      idleTimeoutInSeconds: 30, // seconds
-    });
-
+    // TimeMe.initialize({
+    //   currentPageName: "my-home-page", // current page
+    //   idleTimeoutInSeconds: 30, // seconds
+    // });
     // ... Some time later ...
-
     // Retrieve time spent on current page
     // setTimeSpentOnPage(TimeMe.getTimeOnCurrentPageInSeconds());
   });

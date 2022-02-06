@@ -88,3 +88,7 @@ export const GetInitials = (string) => {
   }
   return initials;
 };
+
+export const FormatAndParseFloat = (floatNum = 0, toFixed = 1) => {
+  return parseFloat(floatNum.toFixed(toFixed));
+};

@@ -8,6 +8,11 @@ export const RANDOM = (arr = []) => {
   return arr[Math.floor(Math.random() * arr.length)];
 };
 
+export const SETTINGS_CONSTANTS = {
+  IDLE_TIMEOUT: 15, // in seconds
+  UPDATE_INTERVAL: 1, // in seconds
+};
+
 export const CONSTANTS = {
   DOWNLOAD_BLADERS_LINK:
     "https://play.google.com/store/apps/details?id=com.gamersngame.BladersAR&hl=en_IN&gl=US&ref=bladers_website",
@@ -18,6 +23,25 @@ export const CONSTANTS = {
     CHANGE_LOG_ROUTE: "/change-log",
     PRESS_KIT_ROUTE: "/press-kit",
     HOME_ROUTE: "/",
+  },
+  STORAGE: {
+    DAY_STATS: "dayStats",
+    TAB_STATS: "tabStats",
+    WEEK_STATS: "weekStats",
+    MONTH_STATS: "monthStats",
+    CATEGORIES: "categories",
+  },
+  BACKEND: {
+    TEST_DATA: {
+      WebsiteList: ["localhost", "www.figma.com", "stackoverflow.com"],
+      todayData: ["01/January/2021", "02/January/2021", "03/January/2021"],
+      openedData: ["/login", "/signup", "/home"],
+      categoryData: ["Design", "Coding", "Playing", "", "", "", ""],
+    },
+    DAY_UPDATE: {
+      ACTIVE: "ACTIVE",
+      IDLE: "IDLE",
+    },
   },
   RANK: {
     INCREASE: "increase",
