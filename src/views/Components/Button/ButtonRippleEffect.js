@@ -7,6 +7,7 @@ const ButtonRippleEffect = ({
   borderRadius = 16,
   children = "This is a button effect",
   style = {},
+  onclick = () => console.log("Please add a button onclick handler"),
 }) => {
   return (
     <Button
@@ -27,6 +28,7 @@ const ButtonRippleEffect = ({
         minWidth: Theme.SPACING(10),
         ...style,
       }}
+      onClick={() => (onclick ? onclick() : null)}
     >
       {children}
     </Button>

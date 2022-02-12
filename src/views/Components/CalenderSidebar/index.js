@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { CALENDER_CONSTANTS, CONSTANTS } from "../../../Utils/Constants";
 import Theme from "../../../Utils/theme";
 import ButtonRippleEffect from "../Button/ButtonRippleEffect";
@@ -7,6 +8,8 @@ import Flex from "../Container";
 const CalenderSidebar = ({ style = {} }) => {
   const months = CALENDER_CONSTANTS.MONTHS;
   const weeks = CALENDER_CONSTANTS.WEEKS;
+
+  const [active, setActive] = useState("january");
 
   const styles = {
     rowFlex: {
@@ -28,7 +31,7 @@ const CalenderSidebar = ({ style = {} }) => {
       lineBreak: "anywhere",
       position: "sticky",
       textAlign: CONSTANTS.CSSStyles.FLEX.CENTER,
-      color: Theme.COLORS.shades.color_2,
+      color: "inherit", //Theme.COLORS.shades.color_2,
       top: Theme.SPACING(50),
       margin: `${Theme.SPACING(20)} 0`,
       bottom: Theme.SPACING(50),
@@ -46,69 +49,83 @@ const CalenderSidebar = ({ style = {} }) => {
     },
   };
 
-  const RenderDays = () => {
+  const RenderDays = ({ weekName }) => {
     return (
       <div style={styles.columnFlex}>
-        {[1, 2, 3, 4, 5, 6, 7].map((day) => (
-          <div style={styles.rowFlex} key={day}>
-            <Flex
-              style={{
-                ...styles.clickRectContainer,
-                height: Theme.SPACING(35),
-              }}
-            >
-              <CustomButtonRipple>
-                <Flex style={styles.datetext}>{day}</Flex>
-              </CustomButtonRipple>
-            </Flex>
-            <Flex
-              style={styles.progressIndicatorContainer}
-              justifyContent={CONSTANTS.CSSStyles.FLEX.FLEX_START}
-            >
-              {/* Progress Indicator or props */}
-              <div
+        {[1, 2, 3, 4, 5, 6, 7].map((day) => {
+          const dateNum = weekName + day;
+          return (
+            <div style={styles.rowFlex} key={dateNum}>
+              <Flex
                 style={{
-                  ...styles.progressIndicator,
-                  width: `${Math.random() * 100}%`,
+                  ...styles.clickRectContainer,
+                  height: Theme.SPACING(35),
                 }}
-              ></div>
-            </Flex>
-          </div>
-        ))}
+              >
+                <CustomButtonRipple
+                  id={dateNum}
+                  onclick={() => setActive(dateNum)}
+                >
+                  <Flex style={styles.datetext}>{day}</Flex>
+                </CustomButtonRipple>
+              </Flex>
+              <Flex
+                style={styles.progressIndicatorContainer}
+                justifyContent={CONSTANTS.CSSStyles.FLEX.FLEX_START}
+              >
+                {/* Progress Indicator or props */}
+                <div
+                  style={{
+                    ...styles.progressIndicator,
+                    width: `${Math.random() * 100}%`,
+                  }}
+                ></div>
+              </Flex>
+            </div>
+          );
+        })}
       </div>
     );
   };
 
-  const RenderWeeks = () => {
+  const RenderWeeks = ({ monthName }) => {
     return (
       <div style={styles.columnFlex}>
-        {weeks.map((week) => (
-          <div key={week.number} style={styles.rowFlex}>
-            <Flex style={styles.clickRectContainer}>
-              <CustomButtonRipple>
-                <Flex style={styles.datetext}>
-                  WEEK
-                  <br />
-                  <br />
-                  {week.number}
-                </Flex>
-              </CustomButtonRipple>
-            </Flex>
-            <RenderDays />
-          </div>
-        ))}
+        {weeks.map((week) => {
+          const weekNum = monthName + week.number;
+          return (
+            <div key={weekNum} style={styles.rowFlex}>
+              <Flex style={styles.clickRectContainer}>
+                <CustomButtonRipple
+                  id={weekNum}
+                  onclick={() => setActive(weekNum)}
+                >
+                  <Flex style={styles.datetext}>
+                    WEEK
+                    <br />
+                    <br />
+                    {week.number}
+                  </Flex>
+                </CustomButtonRipple>
+              </Flex>
+              <RenderDays weekName={weekNum} />
+            </div>
+          );
+        })}
       </div>
     );
   };
 
-  const CustomButtonRipple = ({ children, style }) => {
+  const CustomButtonRipple = ({ children, style, id, onclick = undefined }) => {
+    const button = {
+      height: "100%",
+      width: styles.clickRectContainer.width,
+      borderRadius: Theme.SPACING(8),
+      background: id === active ? Theme.COLORS.colors.color_1 : undefined,
+      color: id === active ? Theme.COLORS.shades.color_8 : undefined,
+    };
     return (
-      <ButtonRippleEffect
-        style={{
-          height: "100%",
-          width: styles.clickRectContainer.width,
-        }}
-      >
+      <ButtonRippleEffect style={button} onclick={onclick}>
         {children}
       </ButtonRippleEffect>
     );
@@ -117,18 +134,22 @@ const CalenderSidebar = ({ style = {} }) => {
   return (
     <CardLayout style={style} heading="Calender">
       <div style={{ height: "84vh" }} className="scrollBarHiddenDiv">
-        {months.map((month) => (
-          <div key={month.index} style={styles.rowFlex}>
-            <Flex style={styles.clickRectContainer}>
-              <CustomButtonRipple>
-                <Flex style={styles.datetext}>
-                  {month.fullName.toUpperCase()}
-                </Flex>
-              </CustomButtonRipple>
-            </Flex>
-            <RenderWeeks />
-          </div>
-        ))}
+        {months.map((month) => {
+          const monthName = month.fullName.toUpperCase();
+          return (
+            <div key={month.index} style={styles.rowFlex}>
+              <Flex style={styles.clickRectContainer}>
+                <CustomButtonRipple
+                  id={monthName}
+                  onclick={() => setActive(monthName)}
+                >
+                  <Flex style={styles.datetext}>{monthName}</Flex>
+                </CustomButtonRipple>
+              </Flex>
+              <RenderWeeks monthName={monthName} />
+            </div>
+          );
+        })}
       </div>
     </CardLayout>
   );

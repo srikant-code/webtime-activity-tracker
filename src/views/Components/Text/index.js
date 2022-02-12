@@ -8,8 +8,8 @@ const Text = ({
   weight = "bold",
   children,
   style,
-  animation = RANDOM(CONSTANTS.CSSStyles.ANIMATION.AOS.SLIDE),
-  animationDelay = "50",
+  animation = null, // RANDOM(CONSTANTS.CSSStyles.ANIMATION.AOS.SLIDE),
+  animationDelay = null,
 }) => {
   const properties = Theme.FONTS.cabin[type][weight];
   return (

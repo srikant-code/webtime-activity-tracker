@@ -3,7 +3,7 @@
   "name": "Reflect - Make your chrome powerful with productvity tools & time tracking",
   "version": "0.1",
   "description": "It's for you. powerpacked productivity tools to save you time and track your days",
-  "permissions": [],
+  "permissions": ["activeTab", "tabs", "storage", "idle"],
   "background": {
     "scripts": ["static/js/background.js"]
   },

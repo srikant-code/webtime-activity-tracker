@@ -1,3 +1,4 @@
+/*global chrome*/
 import { CONSTANTS } from "../Constants";
 
 class ChromeLocalStorage {
