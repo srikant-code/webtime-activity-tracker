@@ -1,6 +1,16 @@
 import { SETTINGS_CONSTANTS } from "../Constants";
 
 class Day {
+  totalIdleTime: number;
+  date: string;
+  totalTimeSpent: number;
+  totalVisitCount: number;
+  totaldomainsVisited: number;
+  totalNewLinks: number;
+  topFiveDomains: any[];
+  topCategory: string;
+  productivityScore: number;
+  domains: {};
   constructor({
     date = "",
     totalTimeSpent = 0,
@@ -51,7 +61,7 @@ class Day {
       totalVisitCount =
       totalNewLinks =
       totalIdleTime =
-        0;
+      0;
 
     const domain = this.domains[tabData.domain];
 
@@ -154,7 +164,7 @@ class Day {
       totalVisitCount =
       totalNewLinks =
       totalIdleTime =
-        0;
+      0;
 
     // caluculate new Productivity Score
     const domains = this.domains;
@@ -180,56 +190,57 @@ class Day {
     this.updateDomainSummaryForce(tabData);
     this.updateDayObject();
   };
-
-  convert = () => {
-    const DomainsMapToObject = () => {
-      const convertedToObject = Object.fromEntries(this.domains);
-      // JSON.parse(JSON.stringify(Object.fromEntries(this.domains)));
-      // console.log(this.domains, convertedToObject, "gughk");
-      for (const domain in convertedToObject) {
-        convertedToObject[domain].timeLine = Object.fromEntries(
-          convertedToObject[domain].timeLine
-        );
-      }
-      this.domains = convertedToObject;
-      return convertedToObject;
-    };
-
-    const DomainsObjectToMap = () => {
-      for (const domain in this.domains) {
-        this.domains[domain].timeLine = new Map(
-          Object.entries(this.domains[domain].timeLine)
-        );
-      }
-      this.domains = new Map(Object.entries(this.domains));
-      return this.domains;
-    };
-
-    // const DomainsMapToObject1 = (obj) => {
-    //   const isObject = (val) =>
-    //     val && typeof val === "object" && !Array.isArray(val);
-
-    //   const Util = new Utilities();
-
-    //   const paths = (obj = {}) => {
-    //     for (const key in obj) {
-    //       obj[key] = isObject(obj[key]) ? paths(obj[key]) : obj[key];
-
-    //       obj[key] = Util.isMap(obj[key])
-    //         ? Object.fromEntries(obj[key])
-    //         : obj[key];
-    //     }
-    //     return obj;
-    //   };
-    //   return paths(obj);
-    // };
-
-    return {
-      DomainsMapToObject,
-      DomainsObjectToMap,
-      // DomainsMapToObject1
-    };
-  };
 }
 
 export default Day;
+
+
+// convert = () => {
+//   const DomainsMapToObject = () => {
+//     const convertedToObject = Object.fromEntries(this.domains);
+//     // JSON.parse(JSON.stringify(Object.fromEntries(this.domains)));
+//     // console.log(this.domains, convertedToObject, "gughk");
+//     for (const domain in convertedToObject) {
+//       convertedToObject[domain].timeLine = Object.fromEntries(
+//         convertedToObject[domain].timeLine
+//       );
+//     }
+//     this.domains = convertedToObject;
+//     return convertedToObject;
+//   };
+
+//   const DomainsObjectToMap = () => {
+//     for (const domain in this.domains) {
+//       this.domains[domain].timeLine = new Map(
+//         Object.entries(this.domains[domain].timeLine)
+//       );
+//     }
+//     this.domains = new Map(Object.entries(this.domains));
+//     return this.domains;
+//   };
+
+//   // const DomainsMapToObject1 = (obj) => {
+//   //   const isObject = (val) =>
+//   //     val && typeof val === "object" && !Array.isArray(val);
+
+//   //   const Util = new Utilities();
+
+//   //   const paths = (obj = {}) => {
+//   //     for (const key in obj) {
+//   //       obj[key] = isObject(obj[key]) ? paths(obj[key]) : obj[key];
+
+//   //       obj[key] = Util.isMap(obj[key])
+//   //         ? Object.fromEntries(obj[key])
+//   //         : obj[key];
+//   //     }
+//   //     return obj;
+//   //   };
+//   //   return paths(obj);
+//   // };
+
+//   return {
+//     DomainsMapToObject,
+//     DomainsObjectToMap,
+//     // DomainsMapToObject1
+//   };
+// };

@@ -3,6 +3,9 @@ import Theme from "../../../Utils/theme";
 import Flex from "../Container";
 import Text from "../Text";
 import DayNightImage from "../../Assets/Images/gradientComingSoon.png";
+import Vibrant from "node-vibrant";
+import { useEffect } from "react";
+import ColourPalette from "../ColourPalette";
 
 const ComingSoon = ({ heading = "Heading" }) => {
   const styles = {
@@ -21,8 +24,15 @@ const ComingSoon = ({ heading = "Heading" }) => {
       backgroundSize: "cover",
     },
   };
+  // useEffect(() => {
+  //   Vibrant.from("../../Assets/Images/gradientComingSoon.png")
+  //     .getPalette()
+  //     .then((palette) => console.log(palette, "feaj"));
+
+  // });
   return (
     <Flex flexFlow={CONSTANTS.CSSStyles.FLEX.COLUMN} style={styles.container}>
+      <ColourPalette />
       <Text type={CONSTANTS.CSSStyles.FONTS.HEADING_2}>{heading}</Text>
       <Flex style={styles.comingSoon}>
         <Text type={CONSTANTS.CSSStyles.FONTS.SUB_TEXT}>⏳ Coming Soon</Text>

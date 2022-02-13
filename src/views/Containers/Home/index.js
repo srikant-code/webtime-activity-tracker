@@ -12,6 +12,7 @@ import Header from "../../Components/Header";
 import HexagonIntrestWheel from "../../Components/HexagonIntrestWheel";
 import CustomTextArea from "../../Components/MarkDownTextArea";
 import DaysHoursLeftProgressBar from "../../Components/Progress/DaysLeft";
+import SearchBar from "../../Components/SearchBar";
 import Tabs from "../../Components/Tabs";
 
 const RenderHeader = () => {
@@ -69,8 +70,13 @@ const HomeScreen = () => {
               />
               <MainStatisticsCard style={styles.gap} />
             </Flex>
-            <RecentList style={styles.gap} />
-            <RankingList style={styles.gap} />
+            <Flex flexFlow={CONSTANTS.CSSStyles.FLEX.COLUMN}>
+              <SearchBar style={{ ...styles.gap, width: "97%" }} />
+              <Flex>
+                <RecentList style={styles.gap} />
+                <RankingList style={styles.gap} />
+              </Flex>
+            </Flex>
           </CustomFlex>
           <CustomFlex>
             <RelatedWebsitesCard
