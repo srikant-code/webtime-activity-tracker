@@ -163,6 +163,19 @@ const TODAY = {
   topWebsite: "google.com", // domains[0] and top 5 websites
   totalNewLinks: 3, // summation of new links
   productivityScore: 67, // average PS of domains
+   timeDistribution: {
+    // calculate from function
+    AM: {
+      totalTimeSpent: 700,
+      timeDistribution: [27, 27, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46],
+      prodDistribution: [20, 27, 46, 98, 46, 46, 100, 46, 0, 0, 46, 46],
+    },
+    PM: {
+      totalTimeSpent: 700,
+      timeDistribution: [27, 27, 46, 46, 46, 46, 46, 46, 46, 46, 46, 46],
+      prodDistribution: [20, 27, 46, 98, 46, 46, 100, 46, 0, 0, 46, 46],
+    },
+  },
   domains: [
     {
       name: "google.com",

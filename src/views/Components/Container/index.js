@@ -8,7 +8,9 @@ const Flex = ({
   style,
   className,
   animation = "",
+  id = null,
   animationDelay = "50",
+  ...other
 }) => {
   const styles = {
     flex: {
@@ -26,7 +28,8 @@ const Flex = ({
       className={className ?? null}
       data-aos={animation}
       data-aos-delay={animationDelay}
-    >
+      id={id}
+      {...other}>
       {children}
     </div>
   );

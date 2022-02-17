@@ -19,6 +19,8 @@ import ComingSoon from "../Components/ComingSoon";
 // import TimeMe from "timeme.js";
 import HomeScreen from "../Containers/Home";
 import { CONSTANTS } from "../../Utils/Constants";
+// import Cursor from "../Assets/Images/cursor.png";
+import Cursor from "../Assets/Images/cursor2.png";
 // import AOS from "aos";
 // import "aos/dist/aos.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
@@ -44,9 +46,15 @@ import TestingComponent from "../Containers/Test";
 //   mirror: false, // whether elements should animate out while scrolling past them
 //   anchorPlacement: "top-bottom", // defines which position of the element regarding to window should trigger the animation
 // });
+// cursor: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/heart.png"), auto;
+// cursor: url(${Cursor}), auto;
+// cursor: url("https://duckduckgo.com/i/d3aededb.png"), auto;
 
 const App = () => {
   const css = `
+  body > * {
+    cursor: url(${Cursor}), auto;
+  }
   /* width */
   ::-webkit-scrollbar {
     width: ${Theme.SPACING(6)};
