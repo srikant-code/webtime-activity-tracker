@@ -8,10 +8,9 @@ import StatsCard from "../../Components/Cards/Statistics";
 const Today = () => {
   return (
     <Flex
-      flexFLow={CONSTANTS.CSSStyles.FLEX.COLUMN_WRAP}
+      flexFlow={CONSTANTS.CSSStyles.FLEX.COLUMN_WRAP}
       justifyContent={CONSTANTS.CSSStyles.FLEX.FLEX_START}
-      style={{ maxWidth: Theme.SPACING(650) }}
-    >
+      style={{ maxWidth: Theme.SPACING(650) }}>
       <Text type={CONSTANTS.CSSStyles.FONTS.SUB_HEADING}>Summary</Text>
       <Flex>
         <SummaryCard sup="Total time" main="9h 58m" sub="" />

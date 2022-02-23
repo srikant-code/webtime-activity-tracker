@@ -44,3 +44,14 @@ document.getElementById('searchbox').onkeyup = function(){
 
 
 {/* https://duckduckgo.com/i/0ee59262.png */}
+
+
+// history sample. Reffer the repo https://github1s.com/GoogleChrome/chrome-extensions-samples/tree/main/mv2-archive/api/history/historyOverride
+{
+    "id": "822",
+    "lastVisitTime": 1645394595363.2131,
+    "title": "Total Income In Lifetime: Amount Earned - Airtable",
+    "typedCount": 0,
+    "url": "https://airtable.com/app3m9Cfp0WAAq4pG/tblzhWOibJs7gq1HE/viwVoWpZFGc0RfRk9?blocks=hide",
+    "visitCount": 3
+}

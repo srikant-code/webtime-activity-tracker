@@ -134,6 +134,13 @@ class ChromeLocalStorage {
     console.log("tabStats ", this.tabStats);
     console.log("categories ", this.categories);
     console.log("+======================+");
+    return {
+      dayStats: this.dayStats,
+      weekStats: this.weekStats,
+      monthStats: this.monthStats,
+      tabStats: this.tabStats,
+      categories: this.categories,
+    };
   };
 }
 

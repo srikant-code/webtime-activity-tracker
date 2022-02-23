@@ -1,4 +1,4 @@
-import { CONSTANTS } from "../../../Utils/Constants";
+import { CONSTANTS, USER_DATA } from "../../../Utils/Constants";
 import Theme from "../../../Utils/theme";
 import Flex from "../Container";
 import Text from "../Text";

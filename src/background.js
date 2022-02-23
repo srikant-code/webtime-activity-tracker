@@ -172,3 +172,9 @@ resetLocalStorage();
 
 console.log("Loading all storage data");
 ChromeLS.LoadDataFromChromeStorage();
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.command === "GET_ALL_DATA") {
+    sendResponse({ result: ChromeLS.LogAllStorageData(), status: "done" });
+  }
+});

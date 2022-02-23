@@ -7,15 +7,20 @@ const CustomButton = ({
   text,
   children,
   style,
+  rootStyle = {},
+  labelStyle = {},
   variant = BUTTON_CONSTANTS.FILLED,
   showShadow = true,
+  onclick = null,
 }) => {
   const useStyles = makeStyles({
     root: {
       minWidth: 24,
+      ...rootStyle,
     },
     label: {
       width: "100%",
+      ...labelStyle,
     },
   });
   const classes = useStyles();
@@ -34,6 +39,7 @@ const CustomButton = ({
           root: classes.root,
           label: classes.label,
         }}
+        onClick={() => onclick && onclick()}
         style={{
           padding: `${Theme.SPACING(15)} ${Theme.SPACING(16)}`,
           background:
@@ -60,8 +66,7 @@ const CustomButton = ({
               : Theme.COLORS.shades.color_1,
           transition: CONSTANTS.CSSStyles.ANIMATION.POINT3,
           ...style,
-        }}
-      >
+        }}>
         {text ?? children}
       </Button>
     </>

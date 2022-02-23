@@ -8,6 +8,7 @@ const Text = ({
   weight = "bold",
   children,
   style,
+  className,
   animation = null, // RANDOM(CONSTANTS.CSSStyles.ANIMATION.AOS.SLIDE),
   animationDelay = null,
 }) => {
@@ -19,9 +20,9 @@ const Text = ({
         ...properties,
         ...style,
       }}
+      className={className}
       data-aos={animation}
-      data-aos-delay={animationDelay}
-    >
+      data-aos-delay={animationDelay}>
       {children}
     </p>
   );
@@ -44,20 +45,17 @@ export const TextLayout1 = ({
     <Flex
       flexFlow={CONSTANTS.CSSStyles.FLEX.COLUMN}
       alignItems={CONSTANTS.CSSStyles.FLEX.FLEX_START}
-      style={{ marginRight: Theme.SPACING(10) }}
-    >
+      style={{ marginRight: Theme.SPACING(10) }}>
       <Text
         type={CONSTANTS.CSSStyles.FONTS.SUB_TEXT}
         weight={CONSTANTS.CSSStyles.FONTS.BOLD}
-        style={styles.text}
-      >
+        style={styles.text}>
         {heading}
       </Text>
       <Text
         type={CONSTANTS.CSSStyles.FONTS.SUB_TEXT}
         weight={CONSTANTS.CSSStyles.FONTS.REGULAR}
-        style={styles.text}
-      >
+        style={styles.text}>
         {subText}
       </Text>
     </Flex>

@@ -1,5 +1,6 @@
 import { Badge } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/core";
 import { marked } from "marked";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -10,6 +11,7 @@ import CardLayout from "../Cards/Layout";
 import Flex from "../Container";
 import Text from "../Text";
 import WebsiteIcon from "../WebsiteIcon";
+import DDGUtil from "./DDG/util";
 
 const CSS = CONSTANTS.CSSStyles;
 const FLEX = CSS.FLEX;
@@ -20,6 +22,13 @@ const PERCENTAGE = (v) => `${v}%`;
 const SearchBar = ({ style = {} }) => {
   const [inFocus, setInFocus] = useState(false);
   const [searchParam, setSearchParam] = useState(false);
+  const [duckDuckResult, setDuckDuckResult] = useState({});
+  const id = "searchbar";
+  const Engines = {
+    GOOGLE: "Google",
+    DUCK_DUCK_GO: "Duck Duck Go",
+  };
+
   const [items, setItems] = useState([
     {
       name: "Get item from list",
@@ -33,35 +42,8 @@ const SearchBar = ({ style = {} }) => {
       name: "Get item 3 from list",
       icon: "🔎",
     },
-    {
-      name: "Get item 4 from list",
-      icon: "🔎",
-    },
-    {
-      name: "Get item 5 from list",
-      icon: "🔎",
-    },
   ]);
-  const [duckDuckResult, setDuckDuckResult] = useState({});
-  const id = "searchbar";
-  useEffect(() => {
-    window.handleGoogleAutoComplete = function myAmazingFunction(data) {
-      console.log(data);
-      const modified = data[1].splice(0, 5).map((v) => {
-        return { name: v[0], icon: "🔎" };
-      });
-      setItems(modified);
-    };
-    window.handleDuckDuckGoAutoComplete = function myAmazingFunction(data) {
-      console.log(data);
-      setDuckDuckResult(data);
-    };
-  }, [searchParam]);
 
-  const Engines = {
-    GOOGLE: "Google",
-    DUCK_DUCK_GO: "Duck Duck Go",
-  };
   const GetLink = (text, engine) => {
     const links = {
       [Engines.GOOGLE]: `https://www.google.com/complete/search?client=hp&hl=en&sugexp=msedr&gs_rn=62&gs_ri=hp&cp=1&gs_id=9c&q=${text}&xhr=t&callback=handleGoogleAutoComplete`,
@@ -69,6 +51,7 @@ const SearchBar = ({ style = {} }) => {
     };
     return links[engine];
   };
+
   const autocompleteScript = () => {
     let myScriptGoogle = "";
     let myScriptDDG = "";
@@ -104,6 +87,20 @@ const SearchBar = ({ style = {} }) => {
       };
   };
 
+  useEffect(() => {
+    window.handleGoogleAutoComplete = function myAmazingFunction(data) {
+      // console.log(data);
+      const modified = data[1].splice(0, 5).map((v) => {
+        return { name: v[0], icon: "🔎" };
+      });
+      setItems(modified);
+    };
+    window.handleDuckDuckGoAutoComplete = function myAmazingFunction(data) {
+      // console.log(data);
+      setDuckDuckResult(data);
+    };
+  }, [searchParam]);
+
   const styles = {
     container: {
       width: PERCENTAGE(100),
@@ -136,19 +133,7 @@ const SearchBar = ({ style = {} }) => {
       width: PERCENTAGE(98),
       ...COLORS.effects.circleShadow,
     },
-    searchListItem: {
-      padding: SPACING(8),
-      margin: `0 ${SPACING(8)}`,
-      width: PERCENTAGE(97),
-      borderRadius: SPACING(8),
-      cursor: "pointer",
-      textAlign: "left",
-      background: COLORS.shades.color_8,
-    },
-    icon: {
-      marginRight: SPACING(8),
-    },
-    DDGSug: {},
+    DDGSug: { width: PERCENTAGE(100) },
     DDGheading: {},
   };
   const css = `
@@ -166,11 +151,11 @@ const SearchBar = ({ style = {} }) => {
   return (
     <CardLayout heading="Search" style={{ ...style }}>
       <style>{css}</style>
-
       <Flex style={styles.container} flexFlow={FLEX.COLUMN}>
         <input
           type="text"
           id={id}
+          autoComplete="off"
           style={styles.searchBar}
           placeholder="Search anything"
           onFocus={() => setInFocus(true)}
@@ -180,35 +165,14 @@ const SearchBar = ({ style = {} }) => {
         <Flex style={styles.searchSuggestion}>
           <Flex flexFlow={FLEX.COLUMN} style={styles.searchListContainer}>
             {items.map((item, index) => {
-              return (
-                <Flex
-                  style={styles.searchListItem}
-                  justifyContent={FLEX.FLEX_START}
-                  className="cardHover"
-                  key={index}
-                  tabindex="0">
-                  <div style={styles.icon}>
-                    <WebsiteIcon icon={item.icon} />
-                  </div>
-                  <Text type={CSS.FONTS.SUB_HEADING} weight={CSS.FONTS.REGULAR}>
-                    <span dangerouslySetInnerHTML={{ __html: item.name }} />
-                  </Text>
-                </Flex>
-              );
+              return <RenderGoogleSearchResult key={index} item={item} />;
             })}
-            {duckDuckResult !== {} ? (
-              <Flex style={styles.DDGSug} flexFlow={FLEX.COLUMN}>
-                <Flex>
-                  <Text
-                    type={CSS.FONTS.SMALL}
-                    style={{ color: COLORS.shades.color_4 }}>
-                    Quick results for{" "}
-                    <b style={{ color: COLORS.shades.color_1 }}>
-                      {duckDuckResult?.Heading}
-                    </b>{" "}
-                    from Duck Duck Go
-                  </Text>
-                </Flex>
+            {duckDuckResult !== {} && (
+              <Flex
+                style={styles.DDGSug}
+                flexFlow={FLEX.COLUMN}
+                alignItems={FLEX.FLEX_START}>
+                <RenderDDGQuickResHeading duckDuckResult={duckDuckResult} />
                 {duckDuckResult.Abstract ? (
                   <RenderDDGAbstract duckDuckResult={duckDuckResult} />
                 ) : (
@@ -218,8 +182,6 @@ const SearchBar = ({ style = {} }) => {
                   <RenderDDGResults duckDuckResult={duckDuckResult.Results} />
                 )}
               </Flex>
-            ) : (
-              <></>
             )}
           </Flex>
         </Flex>
@@ -228,10 +190,68 @@ const SearchBar = ({ style = {} }) => {
     </CardLayout>
   );
 };
+
+const RenderGoogleSearchResult = ({ item }) => {
+  const styles = {
+    searchListItem: {
+      padding: SPACING(8),
+      margin: `0 ${SPACING(8)}`,
+      width: PERCENTAGE(97),
+      borderRadius: SPACING(8),
+      cursor: "pointer",
+      textAlign: "left",
+      background: COLORS.shades.color_8,
+    },
+    icon: {
+      marginRight: SPACING(8),
+    },
+  };
+  return (
+    <Flex
+      style={styles.searchListItem}
+      justifyContent={FLEX.FLEX_START}
+      className="cardHover"
+      tabIndex="0">
+      <div style={styles.icon}>
+        <WebsiteIcon icon={item.icon} />
+      </div>
+      <Text type={CSS.FONTS.SUB_HEADING} weight={CSS.FONTS.REGULAR}>
+        <span dangerouslySetInnerHTML={{ __html: item.name }} />
+      </Text>
+    </Flex>
+  );
+};
+
+const RenderDDGQuickResHeading = ({ duckDuckResult }) => {
+  return (
+    <Flex>
+      <Text
+        type={CSS.FONTS.SMALL}
+        style={{
+          color: COLORS.shades.color_4,
+          margin: SPACING(10),
+        }}>
+        Quick results for{" "}
+        <b style={{ color: COLORS.shades.color_1 }}>
+          {duckDuckResult?.Heading}
+        </b>{" "}
+        from Duck Duck Go
+      </Text>
+    </Flex>
+  );
+};
 const RenderDDGResults = ({ duckDuckResult }) => {
   return duckDuckResult.map((item, index) => {
     return (
-      <Flex>
+      <Flex
+        key={index}
+        style={{
+          width: `-webkit-fill-available`,
+          padding: SPACING(10),
+          margin: SPACING(10),
+          borderRadius: SPACING(10),
+        }}
+        className="cardHover">
         <DDGItemImage
           url={item?.Icon?.URL}
           width={16}
@@ -239,24 +259,75 @@ const RenderDDGResults = ({ duckDuckResult }) => {
             marginRight: SPACING(10),
           }}
         />
-        <Text type={CSS.FONTS.SUB_HEADING}>{item.Text}</Text>
+        <Flex>
+          <Text type={CSS.FONTS.SUB_HEADING}>{item.Text}</Text>
+          <Text
+            type={CSS.FONTS.SMALL}
+            style={{
+              color: COLORS.shades.color_4,
+              marginLeft: SPACING(4),
+              marginTop: SPACING(4),
+            }}>
+            &bull; Results
+          </Text>
+        </Flex>
       </Flex>
     );
   });
 };
 const RenderDDGAbstract = ({ duckDuckResult }) => {
+  const splitTextResult = DDGUtil.DivideParagraphToSentences(
+    duckDuckResult.AbstractText
+  );
+  const RenderAbstractHeading = () => {
+    return (
+      <Flex
+        justifyContent={FLEX.SPACE_BETWEEN}
+        style={{ width: PERCENTAGE(100), padding: SPACING(10) }}>
+        <Text
+          type={CSS.FONTS.SUB_HEADING}
+          style={{ color: COLORS.colors.color_1 }}>
+          {duckDuckResult.Heading}
+        </Text>
+        <Text type={CSS.FONTS.SMALL} weight={CSS.FONTS.REGULAR}>
+          Source |{" "}
+          <b style={{ color: COLORS.colors.color_1 }}>
+            {duckDuckResult.AbstractSource}
+          </b>
+        </Text>
+      </Flex>
+    );
+  };
+
+  const RenderAbstractText = ({ item }) => {
+    return (
+      <>
+        <Text
+          // className="cardHover"
+          type={CSS.FONTS.SMALL}
+          style={{
+            padding: SPACING(4),
+            borderRadius: SPACING(8),
+          }}
+          weight={CSS.FONTS.REGULAR}>
+          {item}
+        </Text>
+        <hr />
+      </>
+    );
+  };
+
   return (
     <Flex>
-      <Text type={CSS.FONTS.SUB_HEADING}>{duckDuckResult.Heading}</Text>
-      <Text type={CSS.FONTS.SUB_TEXT} weight={CSS.FONTS.REGULAR}>
-        Source: {duckDuckResult.AbstractSource}
-      </Text>
-      <Flex>
-        <Text type={CSS.FONTS.SUB_TEXT} weight={CSS.FONTS.REGULAR}>
-          {duckDuckResult.AbstractText}
-        </Text>
-        <DDGItemImage url={duckDuckResult.Image} width={90} />
-      </Flex>
+      <RenderAbstractHeading />
+      <div style={{ padding: `0 ${SPACING(10)}` }}>
+        <div style={{ float: "left" }}>
+          <DDGItemImage url={duckDuckResult.Image} width={90} />
+        </div>
+        {splitTextResult.slice(0).map((item, index) => {
+          return <RenderAbstractText item={item} key={index} />;
+        })}
+      </div>
     </Flex>
   );
 };
@@ -271,8 +342,8 @@ const DDGItemImage = ({ url, width = 72, style = {} }) => {
   const [imageAvaialble, setImageAvailable] = useState(false);
   const IsDDGImagePresent = (url = "/i/dc97481e.png") =>
     IsDDGImageAvaialble("https://duckduckgo.com" + url, (width, height) => {
-      setImageAvailable(width < 5 && height < 5 ? false : true);
-      console.log(width < 5 && height < 5, "image avaialbility");
+      setImageAvailable(width < 16 && height < 16 ? false : true);
+      // console.log(width < 16 && height < 16, "image avaialbility");
     });
 
   useEffect(() => {
@@ -300,7 +371,91 @@ const DDGItemImage = ({ url, width = 72, style = {} }) => {
   );
 };
 
-const RenderCommonDDGResults = ({ duckDuckResult }) => {
+const RenderBadgeButton = ({ item, onclick, active = false }) => {
+  const styles = {
+    buttons: {
+      height: SPACING(40),
+      // width: PERCENTAGE(100),
+      width: `-webkit-fill-available`,
+      fontWeight: CSS.FONTS.BOLD,
+    },
+    label: {
+      ...CSS.FONTS.ELLIPSIS,
+      textAlign: "left",
+      display: "block",
+    },
+    active: {
+      background: COLORS.colors.color_1,
+      color: COLORS.shades.color_8,
+    },
+  };
+  const useStyles = makeStyles({
+    badge: {
+      background: COLORS.colors.color_2,
+      color: COLORS.shades.color_8,
+      border: `${SPACING(2)} solid ${COLORS.shades.color_7}`,
+    },
+  });
+  const classes = useStyles();
+  return (
+    <StyledBadge
+      badgeContent={item.Topics ? item.Topics.length : 0}
+      classes={{
+        badge: active ? classes.badge : {},
+      }}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "left",
+      }}>
+      <CustomButton
+        variant={BUTTON_CONSTANTS.CONTAINED}
+        showShadow={false}
+        labelStyle={styles.label}
+        onclick={onclick}
+        style={
+          active ? { ...styles.buttons, ...styles.active } : styles.buttons
+        }>
+        {
+          [
+            "😀",
+            "😁",
+            "😂",
+            "🤣",
+            "😃",
+            "😄",
+            "😅",
+            "😆",
+            "😉",
+            "😊",
+            "😋",
+            "😎",
+            "😍",
+          ][Math.floor(Math.random() * 13)]
+        }
+        {item.Name}
+      </CustomButton>
+    </StyledBadge>
+  );
+};
+
+const StyledBadge = withStyles(() => ({
+  badge: {
+    left: 6,
+    top: 12,
+    background: COLORS.shades.color_7,
+    color: COLORS.shades.color_1,
+    ...Theme.FONTS.cabin.small.bold,
+    // border: `2px solid ${COLORS.colors.color_1}`,
+    // padding: "0 4px",
+  },
+  root: { width: PERCENTAGE(100) },
+}))(Badge);
+
+const RenderCommonDDGResults = ({ duckDuckResult = {} }) => {
+  console.log(duckDuckResult);
+  const [ddgResult, setDdgResult] = useState(duckDuckResult);
+  const initialTitle = "Top results";
+  const [titleClicked, setTitleClicked] = useState(initialTitle);
   const styles = {
     DDGSugItem: {
       margin: `0 ${SPACING(10)}`,
@@ -308,89 +463,120 @@ const RenderCommonDDGResults = ({ duckDuckResult }) => {
       borderRadius: SPACING(12),
       width: `-webkit-fill-available`,
     },
-    buttons: {
-      height: SPACING(40),
-      fontWeight: CSS.FONTS.BOLD,
+    width100: {
+      width: PERCENTAGE(100),
     },
+    catHeading: {
+      margin: `0 ${SPACING(10)} ${SPACING(10)} ${SPACING(10)}`,
+      color: COLORS.colors.color_1,
+    },
+    sugRank: { padding: `${SPACING(4)} ${SPACING(10)} 0 0` },
   };
+
+  useEffect(() => {
+    setDdgResult(duckDuckResult);
+    setTitleClicked(initialTitle);
+  }, [duckDuckResult]);
+
+  const DDGItemText = ({ item }) => {
+    return (
+      <Flex
+        flexFlow={FLEX.COLUMN}
+        alignItems={FLEX.FLEX_START}
+        style={{ width: CSS.GENERIC.FIT_CONTENT }}>
+        <Text type={CSS.FONTS.SUB_HEADING}>
+          {DDGUtil.DecodeDDGURLAndConvertToText(item.FirstURL).textJSX}
+        </Text>
+        <Text type={CSS.FONTS.SMALL} weight={CSS.FONTS.REGULAR}>
+          {item.Text.replace(
+            DDGUtil.DecodeDDGURLAndConvertToText(item.FirstURL).text,
+            ""
+          ).replace("Meanings ", "")}
+        </Text>
+      </Flex>
+    );
+  };
+
+  const DDGItemRank = ({ rank }) => {
+    return (
+      <Text type={CSS.FONTS.SUB_HEADING} style={styles.sugRank}>
+        #{rank + 1}
+      </Text>
+    );
+  };
+
   return (
     <Flex
-      flexFlow={FLEX.COLUMN}
       alignItems={FLEX.FLEX_START}
-      justifyContent={FLEX.FLEX_START}>
-      {duckDuckResult.RelatedTopics &&
-        duckDuckResult?.RelatedTopics.map((item, index) => {
-          if (item.FirstURL)
-            return (
-              <Flex
-                style={styles.DDGSugItem}
-                className={"cardHover"}
-                flexFlow={FLEX.ROW}
-                alignItems={FLEX.FLEX_START}
-                justifyContent={FLEX.SPACE_BETWEEN}>
+      flexFlow={FLEX.ROW}
+      justifyContent={FLEX.SPACE_BETWEEN}
+      style={styles.width100}>
+      <Flex
+        flexFlow={FLEX.COLUMN}
+        alignItems={FLEX.FLEX_START}
+        style={styles.width100}>
+        {ddgResult.RelatedTopics && ddgResult.RelatedTopics.length > 0 && (
+          <>
+            <Text type={CSS.FONTS.SUB_HEADING} style={styles.catHeading}>
+              {titleClicked} ({ddgResult.RelatedTopics.length}) -&gt;
+            </Text>
+            <hr />
+          </>
+        )}
+        {ddgResult.RelatedTopics &&
+          ddgResult.RelatedTopics.length > 0 &&
+          ddgResult?.RelatedTopics.map((item, index) => {
+            if (item.FirstURL)
+              return (
                 <Flex
-                  style={{ width: PERCENTAGE(100) }}
+                  style={styles.DDGSugItem}
+                  className={"cardHover"}
+                  key={index}
                   flexFlow={FLEX.ROW}
                   alignItems={FLEX.FLEX_START}
-                  justifyContent={FLEX.FLEX_START}>
-                  <DDGItemImage url={item.Icon.URL} />
+                  justifyContent={FLEX.SPACE_BETWEEN}>
+                  <DDGItemRank rank={index} />
                   <Flex
-                    flexFlow={FLEX.COLUMN}
+                    style={styles.width100}
+                    flexFlow={FLEX.ROW}
                     alignItems={FLEX.FLEX_START}
-                    style={{ width: CSS.GENERIC.FIT_CONTENT }}>
-                    <Text type={CSS.FONTS.SUB_HEADING}>
-                      {DecodeDDGURLAndConvertToText(item.FirstURL)}
-                    </Text>
-                    <Text type={CSS.FONTS.SMALL} weight={CSS.FONTS.REGULAR}>
-                      {item.Text}
-                    </Text>
+                    justifyContent={FLEX.FLEX_START}>
+                    <DDGItemImage url={item.Icon.URL} />
+                    <DDGItemText item={item} />
                   </Flex>
                 </Flex>
-                <Text
-                  type={CSS.FONTS.SUB_HEADING}
-                  style={{ padding: SPACING(4) }}>
-                  #{index + 1}
-                </Text>
-              </Flex>
-            );
-        })}
-      {duckDuckResult.RelatedTopics && (
-        <Flex>
-          {duckDuckResult?.RelatedTopics.map((item, index) => {
-            if (item.Topics) {
-              return (
-                <StyledBadge badgeContent={item.Topics.length}>
-                  <CustomButton
-                    variant={BUTTON_CONSTANTS.CONTAINED}
-                    showShadow={false}
-                    style={styles.buttons}>
-                    {item.Name}
-                  </CustomButton>
-                </StyledBadge>
               );
-            }
+          })}
+      </Flex>
+      {duckDuckResult.RelatedTopics && duckDuckResult.RelatedTopics.length > 0 && (
+        <Flex flexFlow={FLEX.COLUMN} style={{ width: PERCENTAGE(30) }}>
+          <RenderBadgeButton
+            item={{ Name: initialTitle }}
+            active={titleClicked === initialTitle}
+            onclick={() => {
+              setDdgResult(duckDuckResult);
+              setTitleClicked(initialTitle);
+            }}
+          />
+          {duckDuckResult?.RelatedTopics.map((item, index) => {
+            return (
+              item.Topics && (
+                <RenderBadgeButton
+                  item={item}
+                  key={index}
+                  active={titleClicked === item.Name}
+                  onclick={() => {
+                    setDdgResult({ RelatedTopics: item.Topics });
+                    setTitleClicked(item.Name);
+                  }}
+                />
+              )
+            );
           })}
         </Flex>
       )}
     </Flex>
   );
-};
-
-const StyledBadge = withStyles(() => ({
-  badge: {
-    right: 6,
-    top: 12,
-    background: COLORS.shades.color_8,
-    color: COLORS.shades.color_1,
-    ...COLORS.effects.circleShadow,
-    // border: `2px solid ${COLORS.colors.color_1}`,
-    // padding: "0 4px",
-  },
-}))(Badge);
-
-const DecodeDDGURLAndConvertToText = (url) => {
-  const text = url.split("https://duckduckgo.com/")[1];
-  return decodeURIComponent(text).replaceAll("_", " ");
 };
 
 export default SearchBar;

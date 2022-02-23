@@ -192,3 +192,11 @@ export const ResponsiveEffect = (breakpoints) => {
   const { breakpoint } = useWindowDimensions();
   return breakpoints[breakpoint.active];
 };
+
+export const USER_DATA = {
+  ALL_DATA: {},
+  TAB_DATA: {},
+  WEEK_DATA: {},
+  MONTH_DATA: {},
+  DAY_DATA: {},
+};
