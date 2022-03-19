@@ -87,6 +87,7 @@ export const CONSTANTS = {
       ABSOLUTE: "absolute",
       RELATIVE: "relative",
       TRANSPARENT: "transparent",
+      WEBKIT_FILL: "-webkit-fill-available",
     },
     ANIMATION: {
       POINT3: "0.3s all ease-in-out",
@@ -199,4 +200,21 @@ export const USER_DATA = {
   WEEK_DATA: {},
   MONTH_DATA: {},
   DAY_DATA: {},
+};
+
+export const ROUTES = {
+  HOME: "/",
+  INDEX: "",
+  WEEK: "week",
+  DAY: "day",
+  MONTH: "month",
+  ALL_TIME: "alltime",
+  ALL_STATS: "allstats",
+  SITE_STATS: "sitestats",
+  INTERESTS: "categories",
+  SETTINGS: "settings",
+  TEST: "test/*",
+  UPGRADE_TO_PRO: "upgrade-to-pro",
+  ACHIEVEMENTS: "achievements",
+  NOT_FOUND: "*",
 };

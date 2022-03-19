@@ -31,7 +31,7 @@ const CalenderSidebar = ({ style = {} }) => {
       lineBreak: "anywhere",
       position: "sticky",
       textAlign: CONSTANTS.CSSStyles.FLEX.CENTER,
-      color: "inherit", //Theme.COLORS.shades.color_2,
+      color: Theme.COLORS.shades.color_2, //"inherit", //,
       top: Theme.SPACING(50),
       margin: `${Theme.SPACING(20)} 0`,
       bottom: Theme.SPACING(50),
@@ -60,26 +60,22 @@ const CalenderSidebar = ({ style = {} }) => {
                 style={{
                   ...styles.clickRectContainer,
                   height: Theme.SPACING(35),
-                }}
-              >
+                }}>
                 <CustomButtonRipple
                   id={dateNum}
-                  onclick={() => setActive(dateNum)}
-                >
+                  onclick={() => setActive(dateNum)}>
                   <Flex style={styles.datetext}>{day}</Flex>
                 </CustomButtonRipple>
               </Flex>
               <Flex
                 style={styles.progressIndicatorContainer}
-                justifyContent={CONSTANTS.CSSStyles.FLEX.FLEX_START}
-              >
+                justifyContent={CONSTANTS.CSSStyles.FLEX.FLEX_START}>
                 {/* Progress Indicator or props */}
                 <div
                   style={{
                     ...styles.progressIndicator,
                     width: `${Math.random() * 100}%`,
-                  }}
-                ></div>
+                  }}></div>
               </Flex>
             </div>
           );
@@ -98,8 +94,7 @@ const CalenderSidebar = ({ style = {} }) => {
               <Flex style={styles.clickRectContainer}>
                 <CustomButtonRipple
                   id={weekNum}
-                  onclick={() => setActive(weekNum)}
-                >
+                  onclick={() => setActive(weekNum)}>
                   <Flex style={styles.datetext}>
                     WEEK
                     <br />
@@ -141,8 +136,7 @@ const CalenderSidebar = ({ style = {} }) => {
               <Flex style={styles.clickRectContainer}>
                 <CustomButtonRipple
                   id={monthName}
-                  onclick={() => setActive(monthName)}
-                >
+                  onclick={() => setActive(monthName)}>
                   <Flex style={styles.datetext}>{monthName}</Flex>
                 </CustomButtonRipple>
               </Flex>

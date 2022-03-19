@@ -17,14 +17,24 @@ import DaysHoursLeftProgressBar from "../Components/Progress/DaysLeft";
 import MainStatisticsCard from "../Components/Cards/MainStatisticsCard";
 import ComingSoon from "../Components/ComingSoon";
 // import TimeMe from "timeme.js";
-import HomeScreen from "../Containers/Home";
-import { CONSTANTS } from "../../Utils/Constants";
+import AllStatisticsContainer, {
+  RenderHeader,
+} from "../Containers/AllStatistics";
+import { CONSTANTS, ROUTES } from "../../Utils/Constants";
 // import Cursor from "../Assets/Images/cursor.png";
 import Cursor from "../Assets/Images/cursor2.png";
 // import AOS from "aos";
 // import "aos/dist/aos.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import TestingComponent from "../Containers/Test";
+import Settings from "../views/Settings";
+import Achievements from "../views/Acheivements";
+import UpgradeToPro from "../views/UpgradeToPro";
+import Flex from "../Components/Container";
+import HomeScreen from "../Containers/Home";
+import SiteStatisticsContainer from "../Containers/SiteStatistics";
+import InterestsContainer from "../Containers/Interests";
+import Home from "../Containers/Home/home";
 
 // AOS.init({
 //   // Global settings:
@@ -125,28 +135,51 @@ const App = () => {
       <style> {css} </style>
 
       <Router>
-        <div>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="test">Test</Link>
-            </li>
-            <li>
-              <Link to="dashboard">Dashboard</Link>
-            </li>
-          </ul>
-          <hr />
+        <RenderHeader />
+        <div style={{ padding: `${Theme.SPACING(10)} ${Theme.SPACING(30)}` }}>
           <Routes>
-            <Route exact path="/" element={<HomeScreen />} />
-            <Route path="test" element={<TestingComponent />} />
-            <Route path="dashboard" element={<HomeScreen />} />
+            <Route path={ROUTES.HOME} element={<HomeScreen />}>
+              <Route path={ROUTES.INDEX} element={<Home />} />
+              <Route
+                path={ROUTES.ALL_STATS}
+                element={<AllStatisticsContainer />}
+              />
+              <Route
+                path={ROUTES.SITE_STATS}
+                element={<SiteStatisticsContainer />}
+              />
+              <Route path={ROUTES.INTERESTS} element={<InterestsContainer />} />
+            </Route>
+            <Route path={ROUTES.DAY} element={<HomeScreen />}>
+              <Route path={ROUTES.INDEX} element={<Home />} />
+              <Route
+                path={ROUTES.ALL_STATS}
+                element={<AllStatisticsContainer />}
+              />
+              <Route
+                path={ROUTES.SITE_STATS}
+                element={<SiteStatisticsContainer />}
+              />
+              <Route path={ROUTES.INTERESTS} element={<InterestsContainer />} />
+            </Route>
+            <Route path={ROUTES.WEEK} element={<>Week</>}></Route>
+            <Route path={ROUTES.MONTH} element={<>Month</>}></Route>
+            <Route path={ROUTES.ALL_TIME} element={<>All Time</>}></Route>
+
+            <Route path={ROUTES.TEST} element={<TestingComponent />} />
+            <Route path={ROUTES.SETTINGS} element={<Settings />} />
+            <Route path={ROUTES.ACHIEVEMENTS} element={<Achievements />} />
+            <Route path={ROUTES.UPGRADE_TO_PRO} element={<UpgradeToPro />} />
+            <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
           </Routes>
         </div>
       </Router>
     </div>
   );
+};
+
+const NotFound = () => {
+  return <Flex>404 Not found</Flex>;
 };
 
 export default App;

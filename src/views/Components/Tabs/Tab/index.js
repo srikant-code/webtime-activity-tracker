@@ -1,19 +1,21 @@
-import { useState } from "react";
 import { CONSTANTS } from "../../../../Utils/Constants";
 import Theme from "../../../../Utils/theme";
 import CustomButton, { BUTTON_CONSTANTS } from "../../Button";
 import Flex from "../../Container";
 import Text from "../../Text";
 
-const Tab = ({ active, data = "Tab text", index }) => {
+const Tab = ({ active, data = "Tab text", index, buttonStyles }) => {
   //   const [isActive, setIsActive] = useState(false);
   return (
     <Flex>
       <CustomButton
         variant={
-          active === index ? BUTTON_CONSTANTS.FILLED : BUTTON_CONSTANTS.OUTLINED
+          active === index
+            ? BUTTON_CONSTANTS.FILLED
+            : BUTTON_CONSTANTS.CONTAINED
         }
-        showShadow={false}>
+        showShadow={false}
+        style={buttonStyles}>
         <Text
           type={CONSTANTS.CSSStyles.FONTS.SUB_TEXT}
           style={{
@@ -25,13 +27,14 @@ const Tab = ({ active, data = "Tab text", index }) => {
           {data.buttonText ?? "dafault text"}
         </Text>
       </CustomButton>
-      {active === index ? (
+      {active === index && (data.expandHeader || data.expandSubHeader) && (
         <div
           style={{
             margin: `0 0 0 ${Theme.SPACING(-20)}`,
+            background: Theme.COLORS.shades.color_7,
             padding: `${Theme.SPACING(4)} ${Theme.SPACING(20)}`,
             borderRadius: `0 ${Theme.SPACING(12)} ${Theme.SPACING(12)} 0`,
-            border: `solid ${Theme.COLORS.colors.color_1} ${Theme.SPACING(2)}`,
+            border: `solid ${Theme.COLORS.shades.color_5} ${Theme.SPACING(1)}`,
           }}>
           <Text
             type={CONSTANTS.CSSStyles.FONTS.SUB_HEADING}
@@ -48,8 +51,6 @@ const Tab = ({ active, data = "Tab text", index }) => {
             {data.expandSubHeader ?? ""}
           </Text>
         </div>
-      ) : (
-        <></>
       )}
     </Flex>
   );

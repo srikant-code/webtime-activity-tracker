@@ -246,7 +246,7 @@ const RenderDDGResults = ({ duckDuckResult }) => {
       <Flex
         key={index}
         style={{
-          width: `-webkit-fill-available`,
+          width: CSS.GENERIC.WEBKIT_FILL,
           padding: SPACING(10),
           margin: SPACING(10),
           borderRadius: SPACING(10),
@@ -371,12 +371,12 @@ const DDGItemImage = ({ url, width = 72, style = {} }) => {
   );
 };
 
-const RenderBadgeButton = ({ item, onclick, active = false }) => {
+export const RenderBadgeButton = ({ item, onclick, active = false }) => {
   const styles = {
     buttons: {
       height: SPACING(40),
       // width: PERCENTAGE(100),
-      width: `-webkit-fill-available`,
+      width: CSS.GENERIC.WEBKIT_FILL,
       fontWeight: CSS.FONTS.BOLD,
     },
     label: {
@@ -401,7 +401,7 @@ const RenderBadgeButton = ({ item, onclick, active = false }) => {
     <StyledBadge
       badgeContent={item.Topics ? item.Topics.length : 0}
       classes={{
-        badge: active ? classes.badge : {},
+        badge: active ? classes.badge : "",
       }}
       anchorOrigin={{
         vertical: "top",
@@ -432,7 +432,7 @@ const RenderBadgeButton = ({ item, onclick, active = false }) => {
             "😍",
           ][Math.floor(Math.random() * 13)]
         }
-        {item.Name}
+        &nbsp;{item.Name}
       </CustomButton>
     </StyledBadge>
   );
@@ -461,7 +461,7 @@ const RenderCommonDDGResults = ({ duckDuckResult = {} }) => {
       margin: `0 ${SPACING(10)}`,
       padding: SPACING(10),
       borderRadius: SPACING(12),
-      width: `-webkit-fill-available`,
+      width: CSS.GENERIC.WEBKIT_FILL,
     },
     width100: {
       width: PERCENTAGE(100),

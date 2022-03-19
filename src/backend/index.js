@@ -139,3 +139,18 @@ const generateTabAndDay = (DayStat, tabData) => {
 };
 
 export default GenerateData;
+
+/// jab favicon dal raha hai tabhi hi pagetitle ko split karke word map m dal dena.
+// usse categories k suggestions show ho sakte hain.
+
+/// Other classess to use
+// Notes
+// Feedback responses
+// Device ID and data
+// categories
+// topSites
+// bookmarks
+// windowcaputure images https://developer.chrome.com/docs/extensions/reference/tabs/#method-captureVisibleTab
+
+// Uninstall karne se pehle sab data lp firebase m store kar lena user ka.
+// store a key in locastorage to identify device, and firestore json m bas device ka reference de dena.

@@ -25,7 +25,7 @@ import { Pxtorem } from "./Constants";
 //TODO: Change it to Cabin
 export const MODE = {
   DARK: {
-    MODE: "DARK",
+    MODE: "Dark",
     THEME: {
       colors: {
         color_1: "#9399F5",
@@ -43,7 +43,7 @@ export const MODE = {
     },
   },
   LIGHT: {
-    MODE: "LIGHT",
+    MODE: "Light",
     THEME: {
       colors: {
         color_1: "#A259FF",
@@ -61,7 +61,7 @@ export const MODE = {
     },
   },
   NEBULA: {
-    MODE: "NEBULA",
+    MODE: "Nebula",
     THEME: {
       colors: {
         color_1: "#A259FF",
@@ -79,7 +79,7 @@ export const MODE = {
     },
   },
   RED_VELVET: {
-    MODE: "RED_VELVET",
+    MODE: "Red Velvet",
     THEME: {
       colors: {
         color_1: "#ff6262",

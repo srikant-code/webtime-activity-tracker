@@ -80,8 +80,7 @@ const IconAndTextCard = ({
       <ButtonRippleEffect
         width={width}
         height={width}
-        borderRadius={borderRadius}
-      >
+        borderRadius={borderRadius}>
         <WebsiteIcon
           className="cardHover"
           icon={data.icon}
@@ -101,8 +100,7 @@ const IconAndTextCard = ({
                   : data.topText
                   ? FLEX.SPACE_BETWEEN
                   : FLEX.FLEX_END
-              }
-            >
+              }>
               {data.topText && textOrientation !== FLEX.CENTER ? (
                 <Text type={CSS.FONTS.SUB_TEXT} style={styles.text}>
                   {data.topText}
@@ -123,8 +121,7 @@ const IconAndTextCard = ({
           style={{
             ...styles.text,
             margin: `${SPACING(4)} 0 ${SPACING(4)} ${SPACING(4)}`,
-          }}
-        >
+          }}>
           {data.text}
         </Text>
       ) : (
@@ -151,6 +148,7 @@ const RelatedWebsitesCard = ({
   cardPerRow = 5,
   cardWidth = 100,
   cardHeight = 100,
+  heading = "Related Websites",
   // textOrientation = BOTTOM,
   textOrientation = FLEX.CENTER + "fesd",
   style = {},
@@ -195,7 +193,7 @@ const RelatedWebsitesCard = ({
   let rowData = [];
 
   return (
-    <CardLayout heading="Related Websites" style={style}>
+    <CardLayout heading={heading} style={style}>
       <Flex>
         {data.length >= cardPerRow ? (
           <Flex flexFlow={FLEX.COLUMN_WRAP} alignItems={FLEX.FLEX_START}>

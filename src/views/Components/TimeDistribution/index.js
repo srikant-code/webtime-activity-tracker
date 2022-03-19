@@ -26,7 +26,7 @@ const TimeDistribution = () => {
       zIndex: 1,
     },
     meridianContainer: {
-      width: "-webkit-fill-available",
+      width: CONSTANTS.CSSStyles.GENERIC.WEBKIT_FILL,
       padding: `${Theme.SPACING(16)} ${Theme.SPACING(16)}`,
       zIndex: 2,
     },
@@ -59,12 +59,10 @@ const TimeDistribution = () => {
       <Flex
         style={styles.content}
         flexFlow={CONSTANTS.CSSStyles.FLEX.COLUMN}
-        justifyContent={CONSTANTS.CSSStyles.FLEX.SPACE_BETWEEN}
-      >
+        justifyContent={CONSTANTS.CSSStyles.FLEX.SPACE_BETWEEN}>
         <Flex
           style={styles.meridianContainer}
-          justifyContent={CONSTANTS.CSSStyles.FLEX.SPACE_BETWEEN}
-        >
+          justifyContent={CONSTANTS.CSSStyles.FLEX.SPACE_BETWEEN}>
           <kbd style={styles.meridian}>AM</kbd>
           <kbd style={styles.meridian}>PM</kbd>
         </Flex>
@@ -75,19 +73,16 @@ const TimeDistribution = () => {
                 <Flex
                   flexFlow={CONSTANTS.CSSStyles.FLEX.COLUMN}
                   style={styles.timeDist}
-                  key={index}
-                >
+                  key={index}>
                   <div
                     style={{
                       ...styles.timeDistIndicator,
                       opacity: `${Math.random() * 100}%`,
-                    }}
-                  ></div>
+                    }}></div>
                   <Text
                     type={CONSTANTS.CSSStyles.FONTS.ULTRASMALL}
                     weight={CONSTANTS.CSSStyles.FONTS.BOLD}
-                    style={styles.timeDistLabel}
-                  >
+                    style={styles.timeDistLabel}>
                     {time}
                   </Text>
                 </Flex>
@@ -100,19 +95,16 @@ const TimeDistribution = () => {
                 <Flex
                   flexFlow={CONSTANTS.CSSStyles.FLEX.COLUMN}
                   style={styles.timeDist}
-                  key={index}
-                >
+                  key={index}>
                   <div
                     style={{
                       ...styles.timeDistIndicator,
                       opacity: `${Math.random() * 100}%`,
-                    }}
-                  ></div>
+                    }}></div>
                   <Text
                     type={CONSTANTS.CSSStyles.FONTS.ULTRASMALL}
                     weight={CONSTANTS.CSSStyles.FONTS.BOLD}
-                    style={styles.timeDistLabel}
-                  >
+                    style={styles.timeDistLabel}>
                     {time}
                   </Text>
                 </Flex>

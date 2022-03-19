@@ -51,8 +51,7 @@ const CustomButton = ({
             : "none",
           borderRadius: Theme.SPACING(12),
           border:
-            variant === BUTTON_CONSTANTS.OUTLINED ||
-            variant === BUTTON_CONSTANTS.FILLED
+            variant === BUTTON_CONSTANTS.OUTLINED
               ? `${Theme.COLORS.colors.color_1} solid ${Theme.SPACING(2)}`
               : "none",
           textTransform: "initial",

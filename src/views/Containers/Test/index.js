@@ -11,13 +11,17 @@ import dayMock from "../../SampleJSON/day";
 import monthMock from "../../SampleJSON/month";
 import tabMock from "../../SampleJSON/tab";
 import weekMock from "../../SampleJSON/week";
-import { USER_DATA } from "../../../Utils/Constants";
+import { ROUTES, USER_DATA } from "../../../Utils/Constants";
+import Tabs from "../../Components/Tabs";
+import { Route, Routes } from "react-router-dom";
+import Flex from "../../Components/Container";
 
 const TestingComponent = () => {
   const [memUsage, setMemUsage] = useState("");
   const [allData, setAllData] = useState({});
   const [allData2, setAllData2] = useState({});
   const [counter, setCounter] = useState(0);
+  console.log(allData2);
   const loadMockData = () => {
     USER_DATA.DAY_DATA = dayMock;
     USER_DATA.WEEK_DATA = weekMock;
@@ -66,12 +70,37 @@ const TestingComponent = () => {
       setAllData(JSON.stringify(e));
     }
   }, [counter]);
+  const Dummy = ({ text }) => {
+    return <Flex>hello from {text}</Flex>;
+  };
   return (
     <>
       <Today />
       <Tab />
+      <Tabs />
+      <Routes>
+        <Route index element={<Dummy text="dfs" />} />
+        <Route path="hello" exact element={<Dummy text="ksdg" />} />
+        <Route path="world" exact element={<Dummy text="ksdg" />} />
+        <Route path="below" exact element={<Dummy text="advgdssdg" />} />
+        <Route path={ROUTES.NOT_FOUND} element={<Dummy text="not found" />} />
+      </Routes>
       <CustomTextArea />
-      <MainStatisticsCard />
+      <MainStatisticsCard
+        data={{
+          heading: "Tab",
+          website: "Figma",
+          // pass other icons details etc
+          stats: {
+            totalVisits: 58,
+            totalIdleTime: 30 * 60, // in sec
+            mostActiveTime: "4-5pm", // maybe pass an array
+            mostActiveDay: 7, // Saturdays
+            inTopFive: 5,
+            totalScreenTime: 12 * 60 * 60, //sec
+          },
+        }}
+      />
       <CustomButton text="Popup" />
       <SummaryCard />
       <ComingSoon heading="Tab notes" />
